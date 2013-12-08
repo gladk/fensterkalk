@@ -18,26 +18,23 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "node.h"
+#include "frame.h"
 #include <iostream>
 
-node::node(Eigen::Vector3d c, double angle) {
-  _c = c;
-  _angle = angle;
+frame::frame(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2) {
+  _node1 = node1;
+  _node2 = node2;
+  this->calculateLength();
 };
 
-Eigen::Vector3d node::c() {
-  return _c;
+void frame::calculateLength() {
+  _length = (_node1->c() - _node2->c()).norm();
 };
 
-void node::c(Eigen::Vector3d c) {
-  _c=c;
-};
-
-void node::angle(double angle) {
-  _angle=angle;
-};
-
-double node::angle() {
-  return _angle;
-};
+void frame::showFrame() {
+  std::cout<<_node1->c()(0)<<" "<<_node1->c()(1)<<" "<<_node1->c()(2)<<"; ";
+  std::cout<<_node2->c()(0)<<" "<<_node2->c()(1)<<" "<<_node2->c()(2)<<"; ";
+  std::cout<<_length<<"[mm]; angles ";
+  //std::cout<< _node1->angleGRAD()/2.0 << " ";
+  //std::cout<< _node2->angleGRAD()/2.0 <<std::endl;
+}

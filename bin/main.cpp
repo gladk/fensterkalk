@@ -74,7 +74,7 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
   catch(...) {
       std::cerr << "Exception of unknown type!\n";
   }
-  std::shared_ptr<configopt> configParams;
-  configParams = std::shared_ptr<configopt> (new configopt(configFileName));
+  boost::shared_ptr<configopt> configParams;
+  configParams = boost::shared_ptr<configopt> (new configopt(configFileName));
   
 }

@@ -18,26 +18,20 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+#pragma once
+
 #include "node.h"
-#include <iostream>
+#include <boost/shared_ptr.hpp>
 
-node::node(Eigen::Vector3d c, double angle) {
-  _c = c;
-  _angle = angle;
-};
-
-Eigen::Vector3d node::c() {
-  return _c;
-};
-
-void node::c(Eigen::Vector3d c) {
-  _c=c;
-};
-
-void node::angle(double angle) {
-  _angle=angle;
-};
-
-double node::angle() {
-  return _angle;
+class frame {
+  private:
+    boost::shared_ptr<node> _node1;
+    boost::shared_ptr<node> _node2;
+    double _length;
+    
+  public:
+    frame (boost::shared_ptr<node> node1, boost::shared_ptr<node> node2);
+    void calculateLength();
+    void showFrame();
 };
