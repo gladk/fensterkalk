@@ -20,6 +20,7 @@
 
 #include "main.h"
 #include "log.h"
+#include "config.h"
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -28,6 +29,7 @@ namespace fs = boost::filesystem;
 int main(int ac, char* av[])
 { 
   boost::shared_ptr<logs> log (new logs());
+  std::string configFileName;
   
   std::cout<<"\n\
 Fensterkalk \n\
@@ -55,14 +57,14 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
     }
     
     if (vm.count("input")) {
-      std::string ss = "input file is: " + vm["config"].as<std::string>();
+      std::string ss = "input file is: " + vm["input"].as<std::string>();
+      configFileName = vm["input"].as<std::string>();
       log->info(ss);
     } else {
       std::string ss = "input file is required, use `-i` option for that or `--help`.\n";
       log->info(ss);
       exit (EXIT_FAILURE);
     }
-    //configFileName = vm["config"].as<string>();
   }
    catch(std::exception& e) {
       std::string ss =  "error: " + std::string(e.what());
@@ -72,4 +74,7 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
   catch(...) {
       std::cerr << "Exception of unknown type!\n";
   }
+  std::shared_ptr<configopt> configParams;
+  configParams = std::shared_ptr<configopt> (new configopt(configFileName));
+  
 }
