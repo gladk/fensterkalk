@@ -25,28 +25,13 @@
 #include <memory>
 #include <vector>
 
-class particle {
+class node {
   private:
-    Eigen::Vector3d _c;                    // Center of mass
-    unsigned long long _id; int _type;     // Particle id, type
-    unsigned int _fileId;                  // File number of the particle
-    double _rad;                           // Particle radius
-    double _d;                             // Density of the particle
-
+    Eigen::Vector3d _c;
+    double _angle;
+    
   public:
-    particle(unsigned long long id, int type, double rad, double dens, Eigen::Vector3d c);
-    particle();
-    unsigned long long id() {return _id;};
-    
-    int type() {return _type;};
-    void type(int t) {_type = t;};
-    
-    double rad() {return _rad;};
-    void rad(double r) {_rad = r;};
-    
-    Eigen::Vector3d c() {return _c;}
-    void c(Eigen::Vector3d c) {_c=c;}
-    
-    double vol() { return 4.0/3.0*M_PI*_rad*_rad*_rad;};
-    double density() {return _d;};
+    node(Eigen::Vector3d c, double angle);
+    Eigen::Vector3d c();
+    void c(Eigen::Vector3d c);
 };

@@ -21,18 +21,15 @@
 #include "node.h"
 #include <iostream>
 
-particle::particle(unsigned long long id, int type, double rad, double dens, Eigen::Vector3d c) {
-  _id = id;
-  _type = type;
-  _rad = rad;
+node::node(Eigen::Vector3d c, double angle) {
   _c = c;
-  _d = dens;
+  _angle = angle;
 };
 
-particle::particle() {
-  _id = -1;
-  _type = -1;
-  _rad = -1.0;
-  _c = Eigen::Vector3d::Zero();
-  _d = -1.0;
+Eigen::Vector3d node::c() {
+  return _c;
+};
+
+void node::c(Eigen::Vector3d c) {
+  _c=c;
 };
