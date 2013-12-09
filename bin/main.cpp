@@ -77,4 +77,5 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
   boost::shared_ptr<configopt> configParams;
   configParams = boost::shared_ptr<configopt> (new configopt(configFileName));
   
+  
 }
