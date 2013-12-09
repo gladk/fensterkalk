@@ -32,6 +32,7 @@ class node {
     
   public:
     node(Eigen::Vector3d c, double angle);
+    node(Eigen::Vector3d c);
     Eigen::Vector3d c();
     double angle();
     void c(Eigen::Vector3d c);

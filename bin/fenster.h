@@ -31,4 +31,6 @@ class fenster {
     
   public:
     fenster (boost::shared_ptr<configopt> config);
+    boost::shared_ptr <constr> addFenster();
+    bool loadFile();
 };

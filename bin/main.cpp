@@ -21,6 +21,7 @@
 #include "main.h"
 #include "log.h"
 #include "config.h"
+#include "fenster.h"
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -76,6 +77,8 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
   }
   boost::shared_ptr<configopt> configParams;
   configParams = boost::shared_ptr<configopt> (new configopt(configFileName));
-  
+
+  boost::shared_ptr<fenster> fensterCur = boost::shared_ptr<fenster> (new fenster(configParams));
+  fensterCur->loadFile();
   
 }
