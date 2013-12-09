@@ -24,3 +24,6 @@
 bool constr::addFrame(boost::shared_ptr<frame> frame) {
   _frameCountour.push_back(frame);
 };
+constr::constr() {
+  _calculatedConstr=false;
+};
