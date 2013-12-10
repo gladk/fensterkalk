@@ -36,4 +36,7 @@ class frame {
     void changeNode2 (boost::shared_ptr<node> nodeT);
     void calculateLength();
     void show();
+    boost::shared_ptr<node> node1();
+    boost::shared_ptr<node> node2();
+    double calculateAngle(boost::shared_ptr<frame> f);
 };

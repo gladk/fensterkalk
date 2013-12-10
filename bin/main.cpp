@@ -74,11 +74,16 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
   }
   catch(...) {
       std::cerr << "Exception of unknown type!\n";
+      exit (EXIT_FAILURE);
   }
   boost::shared_ptr<configopt> configParams;
   configParams = boost::shared_ptr<configopt> (new configopt(configFileName));
 
   boost::shared_ptr<fenster> fensterCur = boost::shared_ptr<fenster> (new fenster(configParams));
-  fensterCur->loadFile();
+  
+  if (not(fensterCur->loadFile())) {
+    std::cerr<<"Construction is wrong!";
+    exit (EXIT_FAILURE);
+  }
   
 }

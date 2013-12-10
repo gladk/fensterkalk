@@ -47,10 +47,24 @@ void constr::addNode(Eigen::Vector3d nodeT) {
     frameTMP = boost::shared_ptr<frame> (new frame(_nodes[_nodes.size()],_nodes[0]));
     _frames.push_back(frameTMP);
   }
+  _calculatedConstr=false;
 };
 
 void constr::show() {
   BOOST_FOREACH(boost::shared_ptr<frame> frameTMP, _frames) {
     frameTMP->show();
   }
+};
+
+bool constr::checkFrames() {
+  for (int i = 1; i < _frames.size(); i++) {
+    if (_frames[i-1]->node2() != _frames[i]->node1()) {
+      std::cerr<<i;
+      return false;
+    }
+  }
+  if (_frames[0]->node1() != _frames[_frames.size()-1]->node2()) {
+    return false;
+  }
+  return true;
 };

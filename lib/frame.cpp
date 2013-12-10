@@ -48,3 +48,17 @@ void frame::show() {
   std::cout<< _node1->angleGRAD()/2.0 << " ";
   std::cout<< _node2->angleGRAD()/2.0 <<std::endl;
 }
+
+boost::shared_ptr<node> frame::node1() {
+  return _node1;
+}
+
+boost::shared_ptr<node> frame::node2() {
+  return _node2;
+}
+
+double frame::calculateAngle(boost::shared_ptr<frame> f) {
+  const Eigen::Vector3d a1 = (_node2->c() - _node1->c()).normalized();
+  const Eigen::Vector3d a2 = ((f->node2())->c() - (f->node1())->c()).normalized();
+  return acos(a1.dot(-a2));
+}

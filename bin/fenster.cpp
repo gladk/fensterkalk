@@ -52,6 +52,10 @@ bool fenster::loadFile() {
       constrTMP->addNode(nodeTMP);
     }
   }
-  constrTMP->show();
+  if (not(constrTMP->checkFrames())) {
+    constrTMP->show();
+    std::cerr<<"Constriction is wrong!";
+    return false;
+  }
   return true;
 };
