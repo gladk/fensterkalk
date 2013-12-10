@@ -35,5 +35,5 @@ class frame {
     void changeNode1 (boost::shared_ptr<node> nodeT);
     void changeNode2 (boost::shared_ptr<node> nodeT);
     void calculateLength();
-    void showFrame();
+    void show();
 };

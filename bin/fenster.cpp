@@ -45,14 +45,13 @@ bool fenster::loadFile() {
   int nodes_number = pt.get<int>("nodes_number", -1);
   if (nodes_number>0) {
     for (unsigned i=0; i < nodes_number; i++){
-      boost::shared_ptr<node> nodeTMP = 
-        boost::shared_ptr<node> (new node(Eigen::Vector3d((Eigen::Vector3d(
+      Eigen::Vector3d nodeTMP = Eigen::Vector3d((Eigen::Vector3d(
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".x"), 
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".y"), 
-        pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".z"))))));
-      nodes.push_back(nodeTMP);
+        pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".z"))));
+      constrTMP->addNode(nodeTMP);
     }
   }
-  
+  constrTMP->show();
   return true;
 };

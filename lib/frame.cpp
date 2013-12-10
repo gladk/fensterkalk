@@ -41,7 +41,7 @@ void frame::changeNode2 (boost::shared_ptr<node> nodeT) {
   this->calculateLength();
 };
 
-void frame::showFrame() {
+void frame::show() {
   std::cout<<_node1->c()(0)<<" "<<_node1->c()(1)<<" "<<_node1->c()(2)<<"; ";
   std::cout<<_node2->c()(0)<<" "<<_node2->c()(1)<<" "<<_node2->c()(2)<<"; ";
   std::cout<<_length<<"[mm]; angles ";

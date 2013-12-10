@@ -20,9 +20,10 @@
 
 #include "constr.h"
 #include <iostream>
+#include <boost/foreach.hpp>
 
 bool constr::addFrame(boost::shared_ptr<frame> frame) {
-  _frameCountour.push_back(frame);
+  _frames.push_back(frame);
 };
 
 constr::constr() {
@@ -37,13 +38,19 @@ void constr::addNode(Eigen::Vector3d nodeT) {
     frameTMP1 = boost::shared_ptr<frame> (new frame(_nodes[0],_nodes[1]));
     frameTMP2 = boost::shared_ptr<frame> (new frame(_nodes[1],_nodes[2]));
     frameTMP3 = boost::shared_ptr<frame> (new frame(_nodes[2],_nodes[0]));
-    _frameCountour.push_back(frameTMP1);
-    _frameCountour.push_back(frameTMP2);
-    _frameCountour.push_back(frameTMP3);
+    _frames.push_back(frameTMP1);
+    _frames.push_back(frameTMP2);
+    _frames.push_back(frameTMP3);
   } else if (_nodes.size() > 3) {
-    _frameCountour[_nodes.size()]->changeNode2(nodeTMP);
+    _frames[_nodes.size()]->changeNode2(nodeTMP);
     boost::shared_ptr<frame> frameTMP;
     frameTMP = boost::shared_ptr<frame> (new frame(_nodes[_nodes.size()],_nodes[0]));
-    _frameCountour.push_back(frameTMP);
+    _frames.push_back(frameTMP);
+  }
+};
+
+void constr::show() {
+  BOOST_FOREACH(boost::shared_ptr<frame> frameTMP, _frames) {
+    frameTMP->show();
   }
 };
