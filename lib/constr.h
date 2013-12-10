@@ -34,5 +34,7 @@ class constr {
     bool addFrame(boost::shared_ptr<frame> frame);
     void addNode(Eigen::Vector3d nodeT);
     bool checkFrames();
+    bool calculated();
     void show();
+    void calculate();
 };

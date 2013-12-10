@@ -26,11 +26,12 @@
 
 class fenster {
   private:
-    std::vector<boost::shared_ptr<constr> > _fenster;
+    std::vector<boost::shared_ptr<constr> > _constr;
     boost::shared_ptr<configopt> _cfg;
     
   public:
     fenster (boost::shared_ptr<configopt> config);
     boost::shared_ptr <constr> addFenster();
     bool loadFile();
+    bool calculate();
 };

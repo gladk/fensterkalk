@@ -68,3 +68,15 @@ bool constr::checkFrames() {
   }
   return true;
 };
+
+bool constr::calculated() {
+  return _calculatedConstr;
+};
+
+void constr::calculate() {
+  for (int i = 0; i < _frames.size()-1; i++) {
+    _frames[i]->node2()->angle(_frames[i]->calculateAngle(_frames[i+1]));
+  }
+  _frames[_frames.size()-1]->node2()->angle(_frames[_frames.size()-1]->calculateAngle(_frames[0]));
+  _calculatedConstr=true;
+};

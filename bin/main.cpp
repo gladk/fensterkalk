@@ -85,5 +85,5 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
     std::cerr<<"Construction is wrong!";
     exit (EXIT_FAILURE);
   }
-  
+  fensterCur->calculate();
 }

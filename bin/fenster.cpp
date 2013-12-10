@@ -27,11 +27,20 @@
 fenster::fenster(boost::shared_ptr<configopt> config) {
   _cfg=config;
 };
+
 boost::shared_ptr<constr> fenster::addFenster() {
   boost::shared_ptr<constr> constrTMP = 
     boost::shared_ptr<constr> (new constr());
-  _fenster.push_back(constrTMP);
+  _constr.push_back(constrTMP);
   return constrTMP;
+};
+
+bool fenster::calculate() {
+  BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
+    if (not(constrTmp->calculated())){
+      constrTmp->calculate();
+    }
+  }
 };
 
 bool fenster::loadFile() {
