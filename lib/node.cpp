@@ -20,6 +20,7 @@
 
 #include "node.h"
 #include <iostream>
+#include <cmath>
 
 node::node(Eigen::Vector3d c, double angle) {
   _c = c;
@@ -46,3 +47,7 @@ void node::angle(double angle) {
 double node::angle() {
   return _angle;
 };
+
+double node::angleGRAD() {
+  return _angle*180.0/M_PI;
+}

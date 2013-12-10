@@ -45,6 +45,6 @@ void frame::show() {
   std::cout<<_node1->c()(0)<<" "<<_node1->c()(1)<<" "<<_node1->c()(2)<<"; ";
   std::cout<<_node2->c()(0)<<" "<<_node2->c()(1)<<" "<<_node2->c()(2)<<"; ";
   std::cout<<_length<<"[mm]; angles ";
-  //std::cout<< _node1->angleGRAD()/2.0 << " ";
-  //std::cout<< _node2->angleGRAD()/2.0 <<std::endl;
+  std::cout<< _node1->angleGRAD()/2.0 << " ";
+  std::cout<< _node2->angleGRAD()/2.0 <<std::endl;
 }

@@ -35,6 +35,7 @@ class node {
     node(Eigen::Vector3d c);
     Eigen::Vector3d c();
     double angle();
+    double angleGRAD();
     void c(Eigen::Vector3d c);
     void angle(double angle);
 };
