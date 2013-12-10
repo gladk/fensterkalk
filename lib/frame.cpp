@@ -31,6 +31,16 @@ void frame::calculateLength() {
   _length = (_node1->c() - _node2->c()).norm();
 };
 
+void frame::changeNode1 (boost::shared_ptr<node> nodeT) {
+  _node1 = nodeT;
+  this->calculateLength();
+};
+
+void frame::changeNode2 (boost::shared_ptr<node> nodeT) {
+  _node2 = nodeT;
+  this->calculateLength();
+};
+
 void frame::showFrame() {
   std::cout<<_node1->c()(0)<<" "<<_node1->c()(1)<<" "<<_node1->c()(2)<<"; ";
   std::cout<<_node2->c()(0)<<" "<<_node2->c()(1)<<" "<<_node2->c()(2)<<"; ";

@@ -39,7 +39,8 @@ bool fenster::loadFile() {
   using boost::property_tree::read_json;
   ptree pt;
   std::vector <boost::shared_ptr<node> > nodes;
-
+  boost::shared_ptr <constr> constrTMP = addFenster();
+  
   read_json(_cfg->FNameI(), pt);
   int nodes_number = pt.get<int>("nodes_number", -1);
   if (nodes_number>0) {
@@ -51,22 +52,6 @@ bool fenster::loadFile() {
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".z"))))));
       nodes.push_back(nodeTMP);
     }
-  }
-  
-  std::vector<boost::shared_ptr<frame> > frames;
-  for (int i=0; i<nodes_number; i++) {
-    boost::shared_ptr<frame> frameTMP;
-    if (i!=(nodes_number-1)) {
-      frameTMP = boost::shared_ptr<frame> (new frame(nodes[i],nodes[i+1]));
-    } else {
-      frameTMP = boost::shared_ptr<frame> (new frame(nodes[i],nodes[0]));
-    }
-    frames.push_back(frameTMP);
-  }
-  
-  boost::shared_ptr <constr> constrTMP = addFenster();
-  BOOST_FOREACH(boost::shared_ptr<frame> i, frames) {
-    constrTMP->addFrame(i);
   }
   
   return true;

@@ -26,10 +26,12 @@
 class constr {
   private:
     std::vector<boost::shared_ptr<frame> > _frameCountour;
+    std::vector<boost::shared_ptr<node> > _nodes;
     bool _calculatedConstr;
     
   public:
     constr ();
     bool addFrame(boost::shared_ptr<frame> frame);
+    void addNode(Eigen::Vector3d nodeT);
     bool checkFrames();
 };

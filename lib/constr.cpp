@@ -24,6 +24,26 @@
 bool constr::addFrame(boost::shared_ptr<frame> frame) {
   _frameCountour.push_back(frame);
 };
+
 constr::constr() {
   _calculatedConstr=false;
+};
+
+void constr::addNode(Eigen::Vector3d nodeT) {
+  boost::shared_ptr<node> nodeTMP = boost::shared_ptr<node> (new node(nodeT));
+  _nodes.push_back(nodeTMP);
+  if (_nodes.size()==3) {
+    boost::shared_ptr<frame> frameTMP1, frameTMP2, frameTMP3;
+    frameTMP1 = boost::shared_ptr<frame> (new frame(_nodes[0],_nodes[1]));
+    frameTMP2 = boost::shared_ptr<frame> (new frame(_nodes[1],_nodes[2]));
+    frameTMP3 = boost::shared_ptr<frame> (new frame(_nodes[2],_nodes[0]));
+    _frameCountour.push_back(frameTMP1);
+    _frameCountour.push_back(frameTMP2);
+    _frameCountour.push_back(frameTMP3);
+  } else if (_nodes.size() > 3) {
+    _frameCountour[_nodes.size()]->changeNode2(nodeTMP);
+    boost::shared_ptr<frame> frameTMP;
+    frameTMP = boost::shared_ptr<frame> (new frame(_nodes[_nodes.size()],_nodes[0]));
+    _frameCountour.push_back(frameTMP);
+  }
 };
