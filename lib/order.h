@@ -22,16 +22,15 @@
 #pragma once
 
 #include "constr.h"
-#include "config.h"
+//#include "config.h"
 
-class fenster {
+class order {
   private:
     std::vector<boost::shared_ptr<constr> > _constr;
-    boost::shared_ptr<configopt> _cfg;
     
   public:
-    fenster (boost::shared_ptr<configopt> config);
+    order ();
     boost::shared_ptr <constr> addFenster();
-    bool loadFile();
+    bool loadFile(std::string FNameI);
     bool calculate();
 };

@@ -18,24 +18,23 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fenster.h"
+#include "order.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/foreach.hpp>
 
-fenster::fenster(boost::shared_ptr<configopt> config) {
-  _cfg=config;
+order::order() {
 };
 
-boost::shared_ptr<constr> fenster::addFenster() {
+boost::shared_ptr<constr> order::addFenster() {
   boost::shared_ptr<constr> constrTMP = 
     boost::shared_ptr<constr> (new constr());
   _constr.push_back(constrTMP);
   return constrTMP;
 };
 
-bool fenster::calculate() {
+bool order::calculate() {
   BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
     if (not(constrTmp->calculated())){
       constrTmp->calculate();
@@ -43,14 +42,14 @@ bool fenster::calculate() {
   }
 };
 
-bool fenster::loadFile() {
+bool order::loadFile(std::string FNameI) {
   using boost::property_tree::ptree;
   using boost::property_tree::read_json;
   ptree pt;
   std::vector <boost::shared_ptr<node> > nodes;
   boost::shared_ptr <constr> constrTMP = addFenster();
   
-  read_json(_cfg->FNameI(), pt);
+  read_json(FNameI, pt);
   int nodes_number = pt.get<int>("nodes_number", -1);
   if (nodes_number>0) {
     for (unsigned i=0; i < nodes_number; i++){

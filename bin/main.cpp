@@ -21,7 +21,7 @@
 #include "main.h"
 #include "log.h"
 #include "config.h"
-#include "fenster.h"
+#include "order.h"
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -76,14 +76,14 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
       std::cerr << "Exception of unknown type!\n";
       exit (EXIT_FAILURE);
   }
-  boost::shared_ptr<configopt> configParams;
-  configParams = boost::shared_ptr<configopt> (new configopt(configFileName));
+  boost::shared_ptr<configopt> cfgPrm;
+  cfgPrm = boost::shared_ptr<configopt> (new configopt(configFileName));
 
-  boost::shared_ptr<fenster> fensterCur = boost::shared_ptr<fenster> (new fenster(configParams));
+  boost::shared_ptr<order> orderCur = boost::shared_ptr<order> (new order());
   
-  if (not(fensterCur->loadFile())) {
+  if (not(orderCur->loadFile(cfgPrm->FNameI()))) {
     std::cerr<<"Construction is wrong!";
     exit (EXIT_FAILURE);
   }
-  fensterCur->calculate();
+  orderCur->calculate();
 }
