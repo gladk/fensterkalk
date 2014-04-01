@@ -51,8 +51,11 @@ void constr::addNode(Eigen::Vector3d nodeT) {
 };
 
 void constr::show() {
+  unsigned int i=1;
   BOOST_FOREACH(boost::shared_ptr<frame> frameTMP, _frames) {
+    std::cout<<"Frame "<<i<<": ";
     frameTMP->show();
+    i++;
   }
 };
 
