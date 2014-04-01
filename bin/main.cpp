@@ -87,4 +87,5 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
     exit (EXIT_FAILURE);
   }
   orderCur->calculate();
+  orderCur->show();
 }

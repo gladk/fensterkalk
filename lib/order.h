@@ -32,4 +32,5 @@ class order {
     boost::shared_ptr <constr> addConstr();
     bool addConstr(boost::shared_ptr<constr> constrTMP);
     bool calculate();
+    void show();
 };

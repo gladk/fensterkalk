@@ -43,3 +43,12 @@ bool order::calculate() {
     }
   }
 };
+
+void order::show() {
+  unsigned int i=1;
+  BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
+    std::cout<<"==================="<<std::endl<<"Construction "<<i<<std::endl;
+    constrTmp->show();
+    i++;
+  }
+};
