@@ -22,6 +22,7 @@
 #include "log.h"
 #include "config.h"
 #include "order.h"
+#include "loadjson.h"
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -81,7 +82,7 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
 
   boost::shared_ptr<order> orderCur = boost::shared_ptr<order> (new order());
   
-  if (not(orderCur->loadFile(cfgPrm->FNameI()))) {
+  if (not(loadFile(cfgPrm->FNameI(), orderCur))) {
     std::cerr<<"Construction is wrong!";
     exit (EXIT_FAILURE);
   }

@@ -18,28 +18,12 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "order.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
 
-order::order() {
-};
+#include <vector>
+#include "order.h"
 
-boost::shared_ptr<constr> order::addConstr() {
-  boost::shared_ptr<constr> constrTMP = 
-    boost::shared_ptr<constr> (new constr());
-  _constr.push_back(constrTMP);
-  return constrTMP;
-};
-
-bool order::addConstr(boost::shared_ptr<constr> constrTMP) {
-  _constr.push_back(constrTMP);
-  return true;
-};
-
-bool order::calculate() {
-  BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
-    if (not(constrTmp->calculated())){
-      constrTmp->calculate();
-    }
-  }
-};
+bool loadFile(std::string FNameI, boost::shared_ptr<order> orderCur);

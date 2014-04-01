@@ -1,5 +1,5 @@
 #===========================================================
-ADD_EXECUTABLE(fensterkalkbin main.cpp log.cpp config.cpp)
+ADD_EXECUTABLE(fensterkalkbin main.cpp log.cpp config.cpp loadjson.cpp)
 TARGET_LINK_LIBRARIES(fensterkalkbin ${Boost_LIBRARIES} fensterkalklib)
 INSTALL(TARGETS fensterkalkbin DESTINATION ${CMAKE_INSTALL_BINDIR})
 #===========================================================

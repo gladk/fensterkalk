@@ -22,7 +22,6 @@
 #pragma once
 
 #include "constr.h"
-//#include "config.h"
 
 class order {
   private:
@@ -30,7 +29,7 @@ class order {
     
   public:
     order ();
-    boost::shared_ptr <constr> addFenster();
-    bool loadFile(std::string FNameI);
+    boost::shared_ptr <constr> addConstr();
+    bool addConstr(boost::shared_ptr<constr> constrTMP);
     bool calculate();
 };
