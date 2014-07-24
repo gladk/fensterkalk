@@ -35,15 +35,12 @@ class constr {
     std::vector<boost::shared_ptr<node> >  _nodes;
     bool _calculatedConstr;
     
-    Polygon_2CG _frameCG;
-    
   public:
     constr ();
-    bool addFrame(boost::shared_ptr<frame> frame);
-    void addNode(Eigen::Vector3d nodeT);
-    bool checkFrames();
-    bool checkIsSimple();
-    bool calculated();
-    void show();
+    bool addNode(Eigen::Vector3d nodeT);
+    bool checkFrames() const;
+    bool checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes) const;
+    bool calculated() const;
+    void show() const;
     bool calculate();
 };

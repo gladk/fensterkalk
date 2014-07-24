@@ -35,7 +35,9 @@ bool loadFile(std::string FNameI, boost::shared_ptr<order> orderCur) {
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".x"), 
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".y"), 
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".z"))));
-      constrTMP->addNode(nodeTMP);
+      if (not(constrTMP->addNode(nodeTMP))) {
+        return false;
+      }
     }
   }
   if (not(constrTMP->checkFrames())) {

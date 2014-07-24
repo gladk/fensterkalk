@@ -22,16 +22,22 @@
 #include <iostream>
 #include <boost/foreach.hpp>
 
-bool constr::addFrame(boost::shared_ptr<frame> frame) {
-  _frames.push_back(frame);
-};
-
 constr::constr() {
   _calculatedConstr=false;
 };
 
-void constr::addNode(Eigen::Vector3d const nodeT) {
-  boost::shared_ptr<node> nodeTMP = boost::shared_ptr<node> (new node(nodeT));
+bool constr::addNode(Eigen::Vector3d const nodeT) {
+  auto nodeTMP = boost::shared_ptr<node> (new node(nodeT));
+  
+  // Create temporarly _nodeVector to check, whether polygon is simple
+  if (_nodes.size()>1) {
+    auto nodesTMP = _nodes;
+    nodesTMP.push_back(nodeTMP);
+    if (not(this->checkIsSimple(nodesTMP))) {
+      return false;
+    }
+  }
+  
   _nodes.push_back(nodeTMP);
   if (_nodes.size()==3) {
     boost::shared_ptr<frame> frameTMP1, frameTMP2, frameTMP3;
@@ -47,9 +53,10 @@ void constr::addNode(Eigen::Vector3d const nodeT) {
     _frames.push_back(frameTMP);
   }
   _calculatedConstr=false;
+  return true;
 };
 
-void constr::show() {
+void constr::show() const {
   unsigned int i=1;
   BOOST_FOREACH(boost::shared_ptr<frame> frameTMP, _frames) {
     std::cout<<"Frame "<<i<<": ";
@@ -58,7 +65,7 @@ void constr::show() {
   }
 };
 
-bool constr::checkFrames() {
+bool constr::checkFrames() const {
   for (int i = 1; i < _frames.size(); i++) {
     if (_frames[i-1]->node2() != _frames[i]->node1()) {
       std::cerr<<i;
@@ -72,7 +79,7 @@ bool constr::checkFrames() {
   return true;
 };
 
-bool constr::calculated() {
+bool constr::calculated() const{
   return _calculatedConstr;
 };
 
@@ -82,7 +89,7 @@ bool constr::calculate() {
   }
   _frames[_frames.size()-1]->node2()->angle(_frames[_frames.size()-1]->calculateAngle(_frames[0]));
   
-  if (this->checkIsSimple()) {
+  if (this->checkIsSimple(_nodes)) {
     _calculatedConstr=true;
     return false;
   } else {
@@ -91,15 +98,14 @@ bool constr::calculate() {
   }
 };
 
-bool constr::checkIsSimple() {
-  _frameCG.clear();
-  for (int i = 0; i < _nodes.size(); i++) {
-    _frameCG.push_back(PointCG(_nodes[i]->c()[0],_nodes[i]->c()[1]));
+bool constr::checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes) const {
+  Polygon_2CG _frameCG;
+  for (int i = 0; i < nodes.size(); i++) {
+    _frameCG.push_back(PointCG(nodes[i]->c()[0],nodes[i]->c()[1]));
   }
   
   if (not(_frameCG.is_simple())) {
     return false;
   }
-  
   return true;
 }
