@@ -36,4 +36,9 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/bin)
 ADD_SUBDIRECTORY("${CMAKE_SOURCE_DIR}/bin")
 #===========================================================
 
+#===========================================================
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/gui)
+ADD_SUBDIRECTORY("${CMAKE_SOURCE_DIR}/gui")
+#===========================================================
+
 
