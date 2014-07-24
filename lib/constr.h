@@ -22,19 +22,28 @@
 #pragma once
 
 #include "frame.h"
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Polygon_2.h>
 
 class constr {
+  typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
+  typedef KCG::Point_2 PointCG;
+  typedef CGAL::Polygon_2<KCG> Polygon_2CG;
+  
   private:
     std::vector<boost::shared_ptr<frame> > _frames;
-    std::vector<boost::shared_ptr<node> > _nodes;
+    std::vector<boost::shared_ptr<node> >  _nodes;
     bool _calculatedConstr;
+    
+    Polygon_2CG _frameCG;
     
   public:
     constr ();
     bool addFrame(boost::shared_ptr<frame> frame);
     void addNode(Eigen::Vector3d nodeT);
     bool checkFrames();
+    bool checkIsSimple();
     bool calculated();
     void show();
-    void calculate();
+    bool calculate();
 };

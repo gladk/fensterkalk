@@ -30,7 +30,7 @@ constr::constr() {
   _calculatedConstr=false;
 };
 
-void constr::addNode(Eigen::Vector3d nodeT) {
+void constr::addNode(Eigen::Vector3d const nodeT) {
   boost::shared_ptr<node> nodeTMP = boost::shared_ptr<node> (new node(nodeT));
   _nodes.push_back(nodeTMP);
   if (_nodes.size()==3) {
@@ -42,9 +42,8 @@ void constr::addNode(Eigen::Vector3d nodeT) {
     _frames.push_back(frameTMP2);
     _frames.push_back(frameTMP3);
   } else if (_nodes.size() > 3) {
-    _frames[_nodes.size()]->changeNode2(nodeTMP);
-    boost::shared_ptr<frame> frameTMP;
-    frameTMP = boost::shared_ptr<frame> (new frame(_nodes[_nodes.size()],_nodes[0]));
+    _frames[_frames.size()-1]->changeNode2(nodeTMP);
+    auto frameTMP(boost::shared_ptr<frame> (new frame(_nodes[_nodes.size()-1],_nodes[0])));
     _frames.push_back(frameTMP);
   }
   _calculatedConstr=false;
@@ -69,6 +68,7 @@ bool constr::checkFrames() {
   if (_frames[0]->node1() != _frames[_frames.size()-1]->node2()) {
     return false;
   }
+  
   return true;
 };
 
@@ -76,10 +76,30 @@ bool constr::calculated() {
   return _calculatedConstr;
 };
 
-void constr::calculate() {
+bool constr::calculate() {
   for (int i = 0; i < _frames.size()-1; i++) {
     _frames[i]->node2()->angle(_frames[i]->calculateAngle(_frames[i+1]));
   }
   _frames[_frames.size()-1]->node2()->angle(_frames[_frames.size()-1]->calculateAngle(_frames[0]));
-  _calculatedConstr=true;
+  
+  if (this->checkIsSimple()) {
+    _calculatedConstr=true;
+    return false;
+  } else {
+    _calculatedConstr=false;
+    return true;
+  }
 };
+
+bool constr::checkIsSimple() {
+  _frameCG.clear();
+  for (int i = 0; i < _nodes.size(); i++) {
+    _frameCG.push_back(PointCG(_nodes[i]->c()[0],_nodes[i]->c()[1]));
+  }
+  
+  if (not(_frameCG.is_simple())) {
+    return false;
+  }
+  
+  return true;
+}

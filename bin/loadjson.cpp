@@ -40,7 +40,6 @@ bool loadFile(std::string FNameI, boost::shared_ptr<order> orderCur) {
   }
   if (not(constrTMP->checkFrames())) {
     constrTMP->show();
-    std::cerr<<"Constriction is wrong!";
     return false;
   }
   orderCur->addConstr(constrTMP);

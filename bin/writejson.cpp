@@ -39,6 +39,7 @@ void writejson() {
   nodes.push_back(Eigen::Vector3d(0,0,0));
   nodes.push_back(Eigen::Vector3d(1110,0,0));
   nodes.push_back(Eigen::Vector3d(555,2180,0));
+  nodes.push_back(Eigen::Vector3d(10,218,0));
   
   unsigned int i = 0;
   pt.put("nodes_number", nodes.size());
