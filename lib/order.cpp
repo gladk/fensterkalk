@@ -55,3 +55,15 @@ void order::show() {
     i++;
   }
 };
+
+unsigned int order::size() const {
+  return _constr.size();
+};
+
+boost::shared_ptr<constr> order::constrGet(unsigned int i) {
+  if (i<_constr.size() and i>=0) {
+    return _constr[i];
+  } else {
+    return NULL;
+  }
+};

@@ -110,3 +110,15 @@ bool constr::checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes)
   }
   return true;
 }
+
+unsigned int constr::nodeSize() const {
+  return _nodes.size();
+}
+
+boost::shared_ptr<node> constr::nodeGet(unsigned int i) {
+  if (i<_nodes.size() and i>=0) {
+    return _nodes[i];
+  } else {
+    return NULL;
+  }
+}

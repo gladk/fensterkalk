@@ -15,6 +15,9 @@
 #include <QGraphicsPolygonItem>
 #include <QPolygonF>
 
+#include "order.h"
+#include "constrGui.h"
+
 #include <boost/shared_ptr.hpp>
 
 class MainWindow : public QMainWindow
@@ -55,7 +58,9 @@ private:
     QString strippedName(const QString &fullFileName);
     
     void resizeEvent ( QResizeEvent * event=NULL);
-    void wheelEvent  (QWheelEvent* event);
+    void wheelEvent  ( QWheelEvent* event);
+    
+    void badLoadFileDialog();
 
     QPlainTextEdit *textEdit;
     QString curFile;
@@ -70,6 +75,7 @@ private:
     
     QGraphicsView* view;
     QGraphicsScene* scene;
-    QGraphicsRectItem* rect1;
     boost::shared_ptr<QGraphicsPolygonItem> poly1;
+    boost::shared_ptr<constrGui> constr1;
+    boost::shared_ptr<order> orderCur;
 };

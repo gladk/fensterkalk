@@ -1,4 +1,5 @@
 #include "mainWindow.h"
+#include "loadjson.h"
 
 
 MainWindow::MainWindow()
@@ -8,13 +9,6 @@ MainWindow::MainWindow()
     
     scene = new QGraphicsScene();
     view->setScene(scene);
-    view->scale(1, -1);
-     
-    rect1 = new QGraphicsRectItem (0,0,100,100);
-    scene->addItem(rect1);
-    
-    poly1 = boost::shared_ptr<QGraphicsPolygonItem> (new QGraphicsPolygonItem (QPolygonF( QVector<QPointF>()<< QPointF(0.0, 0.0) << QPointF(1110.0, 0.0) << QPointF(555.0, 2180.0)<< QPointF(10.0, 218.0) )));
-    scene->addItem(poly1.get());
     
     createActions();
     createMenus();
@@ -26,6 +20,7 @@ MainWindow::MainWindow()
     
     setCurrentFile("");
     setUnifiedTitleAndToolBarOnMac(true);
+    orderCur = boost::shared_ptr<order> (new order());
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -48,11 +43,27 @@ void MainWindow::newFile()
 
 void MainWindow::open()
 {
-    if (maybeSave()) {
-        QString fileName = QFileDialog::getOpenFileName(this);
-        if (!fileName.isEmpty())
-            loadFile(fileName);
+  QString fileName = QFileDialog::getOpenFileName(this);
+  if (!fileName.isEmpty()) {
+    if (not(loadJson(fileName.toUtf8().constData(), orderCur))) {
+      badLoadFileDialog();
     }
+  }
+  if (not(orderCur->calculate())) {
+    badLoadFileDialog();
+  } else {
+    scene->removeItem(constr1.get());
+    constr1 = boost::shared_ptr<constrGui> (new constrGui (orderCur->constrGet(0)));
+    scene->addItem(constr1.get());
+    resizeEvent();
+  }
+}
+
+void MainWindow::badLoadFileDialog() {
+  QMessageBox::StandardButton ret;
+  ret = QMessageBox::warning(this, tr("Application"),
+               tr("Loaded construction is wrong!"),
+               QMessageBox::Ok);
 }
 
 bool MainWindow::save()
@@ -155,44 +166,7 @@ void MainWindow::writeSettings()
 
 bool MainWindow::maybeSave()
 {
-  /*
-    if (textEdit->document()->isModified()) {
-        QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("Application"),
-                     tr("The document has been modified.\n"
-                        "Do you want to save your changes?"),
-                     QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        if (ret == QMessageBox::Save)
-            return save();
-        else if (ret == QMessageBox::Cancel)
-            return false;
-    }
-  */ 
     return true;
-}
-
-void MainWindow::loadFile(const QString &fileName)
-{
-    QFile file(fileName);
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("Application"),
-                             tr("Cannot read file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-        return;
-    }
-
-    QTextStream in(&file);
-#ifndef QT_NO_CURSOR
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
-    //textEdit->setPlainText(in.readAll());
-#ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
-#endif
-
-    setCurrentFile(fileName);
-    statusBar()->showMessage(tr("File loaded"), 2000);
 }
 
 bool MainWindow::saveFile(const QString &fileName)
@@ -223,7 +197,6 @@ bool MainWindow::saveFile(const QString &fileName)
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     curFile = fileName;
-    //textEdit->document()->setModified(false);
     setWindowModified(false);
 
     QString shownName = curFile;

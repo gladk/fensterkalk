@@ -6,14 +6,20 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 
-class SuperItem : public QGraphicsItem {
+#include "constr.h"
+
+#include <boost/shared_ptr.hpp>
+
+class constrGui : public QGraphicsItem {
   public:
-    SuperItem(QGraphicsItem* parent=NULL);
+    //constrGui(QGraphicsItem* parent=NULL) {};
+    constrGui(boost::shared_ptr<constr> c);
   
   protected:
     void paint(QPainter * painter, 
       const QStyleOptionGraphicsItem * option, 
       QWidget * widget = 0) ;
-  
-  QRectF boundingRect() const;
+    QRectF boundingRect() const;
+    boost::shared_ptr<QPolygonF> _frameGui;
+    
 };

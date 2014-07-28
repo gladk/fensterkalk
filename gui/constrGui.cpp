@@ -1,16 +1,21 @@
 #include "constrGui.h"
 #include <iostream>
-SuperItem::SuperItem(QGraphicsItem* parent) {
-  setFlag(QGraphicsItem::ItemIsFocusable);
+
+constrGui::constrGui(boost::shared_ptr<constr> c) {
+  _frameGui = boost::shared_ptr<QPolygonF> (new QPolygonF());
+  
+  for (unsigned int i = 0 ; i < c->nodeSize(); i++) {
+    *_frameGui << QPointF(c->nodeGet(i)->c()[0], c->nodeGet(i)->c()[1]);
+  }
 }
 
-QRectF SuperItem::boundingRect() const {
-  return QRectF(0,0,30,30);
-}
-
-void  SuperItem::paint(QPainter * painter, 
+void constrGui::paint(QPainter * painter, 
       const QStyleOptionGraphicsItem * option, 
       QWidget * widget) {
   painter->setBrush(Qt::red);
-  painter->drawRoundedRect(0, 0, 30, 30, 5, 5);
+  painter->drawConvexPolygon(*_frameGui);
+}
+
+QRectF constrGui::boundingRect() const{
+  return _frameGui->boundingRect();
 }

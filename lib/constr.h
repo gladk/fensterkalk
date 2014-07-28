@@ -43,4 +43,6 @@ class constr {
     bool calculated() const;
     void show() const;
     bool calculate();
+    unsigned int nodeSize() const;
+    boost::shared_ptr<node> nodeGet(unsigned int i);
 };
