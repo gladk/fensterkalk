@@ -39,9 +39,12 @@ bool order::addConstr(boost::shared_ptr<constr> constrTMP) {
 bool order::calculate() {
   BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
     if (not(constrTmp->calculated())){
-      constrTmp->calculate();
+      if (not(constrTmp->calculate())) {
+        return false;
+      }
     }
   }
+  return true;
 };
 
 void order::show() {

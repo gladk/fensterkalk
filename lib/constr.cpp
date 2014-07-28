@@ -34,6 +34,7 @@ bool constr::addNode(Eigen::Vector3d const nodeT) {
     auto nodesTMP = _nodes;
     nodesTMP.push_back(nodeTMP);
     if (not(this->checkIsSimple(nodesTMP))) {
+      std::cerr<<"Polygon is not simple!"<<std::endl;
       return false;
     }
   }
@@ -91,10 +92,10 @@ bool constr::calculate() {
   
   if (this->checkIsSimple(_nodes)) {
     _calculatedConstr=true;
-    return false;
+    return true;
   } else {
     _calculatedConstr=false;
-    return true;
+    return false;
   }
 };
 

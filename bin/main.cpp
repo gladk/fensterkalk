@@ -82,10 +82,14 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
 
   boost::shared_ptr<order> orderCur = boost::shared_ptr<order> (new order());
   
-  if (not(loadFile(cfgPrm->FNameI(), orderCur))) {
+  if (not(loadJson(cfgPrm->FNameI(), orderCur))) {
     std::cerr<<"Loaded construction is wrong!"<<std::endl;
     exit (EXIT_FAILURE);
   }
-  orderCur->calculate();
+  
+  if (not(orderCur->calculate())) {
+    std::cerr<<"Loaded construction is wrong!"<<std::endl;
+    exit (EXIT_FAILURE);
+  }
   orderCur->show();
 }
