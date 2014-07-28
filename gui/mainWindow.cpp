@@ -1,5 +1,5 @@
 #include "mainWindow.h"
-#include <QGraphicsRectItem>
+
 
 MainWindow::MainWindow()
 { 
@@ -8,9 +8,13 @@ MainWindow::MainWindow()
     
     scene = new QGraphicsScene();
     view->setScene(scene);
+    view->scale(1, -1);
      
     rect1 = new QGraphicsRectItem (0,0,100,100);
     scene->addItem(rect1);
+    
+    poly1 = boost::shared_ptr<QGraphicsPolygonItem> (new QGraphicsPolygonItem (QPolygonF( QVector<QPointF>()<< QPointF(0.0, 0.0) << QPointF(1110.0, 0.0) << QPointF(555.0, 2180.0)<< QPointF(10.0, 218.0) )));
+    scene->addItem(poly1.get());
     
     createActions();
     createMenus();
@@ -237,5 +241,18 @@ void MainWindow::resizeEvent ( QResizeEvent * event)
 {   
     view->setGeometry(QRect(QPoint(bord_left, bord_top), 
                             QPoint(width()-bord_right, height()-bord_bottom)));
+    view->fitInView(scene->sceneRect(),Qt::KeepAspectRatio);
+    view->scale(bord_scale,bord_scale);
     
+}
+
+void MainWindow::wheelEvent  (QWheelEvent* event)
+{   
+  if(event->delta() > 0) {
+    //Zoom in
+    view->scale(zoom_speed,zoom_speed);
+  } else {
+    //Zooming out
+    view->scale(1.0/zoom_speed,1.0/zoom_speed);
+  }
 }

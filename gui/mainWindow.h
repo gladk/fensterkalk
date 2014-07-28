@@ -11,6 +11,11 @@
 #include <QApplication>
 #include <QStatusBar>
 #include <QGraphicsView>
+#include <QGraphicsRectItem>
+#include <QGraphicsPolygonItem>
+#include <QPolygonF>
+
+#include <boost/shared_ptr.hpp>
 
 class MainWindow : public QMainWindow
 {
@@ -26,6 +31,8 @@ protected:
     const double bord_right=50;
     const double bord_top=50;
     const double bord_bottom=50;
+    const double bord_scale=0.9;
+    const double zoom_speed=1.2;
 
 private slots:
     void newFile();
@@ -48,6 +55,7 @@ private:
     QString strippedName(const QString &fullFileName);
     
     void resizeEvent ( QResizeEvent * event=NULL);
+    void wheelEvent  (QWheelEvent* event);
 
     QPlainTextEdit *textEdit;
     QString curFile;
@@ -63,4 +71,5 @@ private:
     QGraphicsView* view;
     QGraphicsScene* scene;
     QGraphicsRectItem* rect1;
+    boost::shared_ptr<QGraphicsPolygonItem> poly1;
 };
