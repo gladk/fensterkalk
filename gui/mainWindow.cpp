@@ -41,21 +41,24 @@ void MainWindow::newFile()
     }
 }
 
-void MainWindow::open()
-{
+void MainWindow::open() {
   QString fileName = QFileDialog::getOpenFileName(this);
+  
   if (!fileName.isEmpty()) {
     if (not(loadJson(fileName.toUtf8().constData(), orderCur))) {
       badLoadFileDialog();
+      return;
     }
   }
+  
   if (not(orderCur->calculate())) {
-    badLoadFileDialog();
+      badLoadFileDialog();
+      return;
   } else {
-    scene->removeItem(constr1.get());
-    constr1 = boost::shared_ptr<constrGui> (new constrGui (orderCur->constrGet(0)));
-    scene->addItem(constr1.get());
-    resizeEvent();
+      if (constr1.get()) scene->removeItem(constr1.get());
+      constr1 = boost::shared_ptr<constrGui> (new constrGui (orderCur->constrGet(0)));
+      scene->addItem(constr1.get());
+      resizeEvent();
   }
 }
 
