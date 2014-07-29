@@ -24,11 +24,15 @@
 #include "node.h"
 #include <boost/shared_ptr.hpp>
 
+enum frameType {FRAME, SHUTTER, MULLION, BEAD};
 class frame {
   private:
     boost::shared_ptr<node> _node1;
     boost::shared_ptr<node> _node2;
     double _length;
+    double _height = 0;
+    double _widthA=0.0, _widthB=0.0, _widthC=0.0;
+    frameType _type=FRAME;
     
   public:
     frame (boost::shared_ptr<node> node1, boost::shared_ptr<node> node2);
@@ -39,4 +43,11 @@ class frame {
     boost::shared_ptr<node> node1();
     boost::shared_ptr<node> node2();
     double calculateAngle(boost::shared_ptr<frame> f);
+    double widthA() const;
+    double widthB() const;
+    double widthC() const;
+    double height() const;
+    frameType type() const;
+    void setGeometry(double wA, double wB, double wC, double h);
+    void setType(frameType t);
 };

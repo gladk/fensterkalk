@@ -62,3 +62,17 @@ double frame::calculateAngle(boost::shared_ptr<frame> f) {
   const Eigen::Vector3d a2 = ((f->node2())->c() - (f->node1())->c()).normalized();
   return acos(a1.dot(-a2));
 }
+
+double frame::widthA() const{return _widthA;}
+double frame::widthB() const{return _widthB;}
+double frame::widthC() const{return _widthC;}
+double frame::height() const{return _height;}
+frameType frame::type() const{return _type;}
+
+void frame::setGeometry(double wA, double wB, double wC, double h) {
+  _widthA = wA;
+  _widthB = wB;
+  _widthC = wC;
+  _height = h;
+}
+void frame::setType(frameType t) {_type=t;}
