@@ -12,7 +12,12 @@ constrGui::constrGui(boost::shared_ptr<constr> c) {
 void constrGui::paint(QPainter * painter, 
       const QStyleOptionGraphicsItem * option, 
       QWidget * widget) {
-  painter->setBrush(Qt::red);
+  painter->setBrush(Qt::white);
+  
+  QPen* penFrame = new QPen();
+  penFrame->setWidth(15.0);
+  painter->setPen(*penFrame);
+  
   painter->drawConvexPolygon(*_frameGui);
 }
 
