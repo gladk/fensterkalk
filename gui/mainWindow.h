@@ -58,7 +58,6 @@ private:
     QString strippedName(const QString &fullFileName);
     
     void resizeEvent ( QResizeEvent * event=NULL);
-    void wheelEvent  ( QWheelEvent* event);
     
     void badLoadFileDialog();
 

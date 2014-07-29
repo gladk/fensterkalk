@@ -221,14 +221,3 @@ void MainWindow::resizeEvent ( QResizeEvent * event)
     view->scale(bord_scale,bord_scale);
     
 }
-
-void MainWindow::wheelEvent  (QWheelEvent* event)
-{   
-  if(event->delta() > 0) {
-    //Zoom in
-    view->scale(zoom_speed,zoom_speed);
-  } else {
-    //Zooming out
-    view->scale(1.0/zoom_speed,1.0/zoom_speed);
-  }
-}
