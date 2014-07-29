@@ -24,10 +24,7 @@
 #include "frame.h"
 
 class constr {
-  typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
-  typedef KCG::Point_2 PointCG;
-  typedef CGAL::Polygon_2<KCG> Polygon_2CG;
-  
+  friend class frame;
   private:
     bool _calculatedConstr=false;
     frame _mainFrame;
@@ -39,4 +36,5 @@ class constr {
     bool checkFrames();
     bool addNodeMainFrame(Eigen::Vector3d nodeTMP);
     void show();
+    std::vector<boost::shared_ptr<node> > mainFrameNodes();
 };

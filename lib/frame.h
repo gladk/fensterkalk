@@ -24,17 +24,9 @@
 #include "beam.h"
 #include <boost/shared_ptr.hpp>
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
-
 enum frameType {FRAME, SHUTTER, MULLION, BEAD};
 class frame {
   private:
-    typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
-    typedef KCG::Point_2 PointCG;
-    typedef CGAL::Polygon_2<KCG> Polygon_2CG;
-    
-    
     std::vector<boost::shared_ptr<node> > _nodes;
     std::vector<boost::shared_ptr<beam> > _beams;
     bool _calculatedFrame=false;
@@ -59,4 +51,5 @@ class frame {
     frameType type() const;
     void setGeometry(double wA, double wB, double wC, double h);
     void setType(frameType t);
+    std::vector<boost::shared_ptr<node> > nodes();
 };

@@ -22,6 +22,9 @@
 #include <iostream>
 #include <boost/foreach.hpp>
 
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Polygon_2.h>
+
 bool frame::addNode(Eigen::Vector3d const nodeT) {
   auto nodeTMP = boost::shared_ptr<node> (new node(nodeT));
   
@@ -74,6 +77,20 @@ bool frame::checkBeams() const {
   return true;
 };
 
+bool frame::checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes) const {
+  typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
+  typedef KCG::Point_2 PointCG;
+  typedef CGAL::Polygon_2<KCG> Polygon_2CG;
+  Polygon_2CG _frameCG;
+  for (int i = 0; i < nodes.size(); i++) {
+    _frameCG.push_back(PointCG(nodes[i]->c()[0],nodes[i]->c()[1]));
+  }
+  
+  if (not(_frameCG.is_simple())) {
+    return false;
+  }
+  return true;
+}
 
 double frame::widthA() const{return _widthA;}
 double frame::widthB() const{return _widthB;}
@@ -88,3 +105,7 @@ void frame::setGeometry(double wA, double wB, double wC, double h) {
   _height = h;
 }
 void frame::setType(frameType t) {_type=t;}
+ std::vector<boost::shared_ptr<node> > frame::nodes() {
+   std::vector<boost::shared_ptr<node> > nodesRet = _nodes;
+  return nodesRet;
+}

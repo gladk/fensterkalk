@@ -27,6 +27,11 @@ void constr::show() {}
 bool constr::checkFrames() {
   return _mainFrame.checkBeams();
 }
+
 bool constr::addNodeMainFrame(Eigen::Vector3d nodeTMP) {
   _mainFrame.addNode(nodeTMP);
+}
+
+std::vector<boost::shared_ptr<node> > constr::mainFrameNodes() {
+  return _mainFrame.nodes();
 }
