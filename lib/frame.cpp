@@ -20,48 +20,60 @@
 
 #include "frame.h"
 #include <iostream>
+#include <boost/foreach.hpp>
 
-frame::frame(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2) {
-  _node1 = node1;
-  _node2 = node2;
-  this->calculateLength();
+bool frame::addNode(Eigen::Vector3d const nodeT) {
+  auto nodeTMP = boost::shared_ptr<node> (new node(nodeT));
+  
+  // Create temporarly _nodeVector to check, whether polygon is simple
+  if (_nodes.size()>1) {
+    auto nodesTMP = _nodes;
+    nodesTMP.push_back(nodeTMP);
+    if (not(this->checkIsSimple(nodesTMP))) {
+      std::cerr<<"Polygon is not simple!"<<std::endl;
+      return false;
+    }
+  }
+  
+  _nodes.push_back(nodeTMP);
+  if (_nodes.size()==3) {
+    auto beamTMP1 = boost::shared_ptr<beam> (new beam(_nodes[0],_nodes[1]));
+    auto beamTMP2 = boost::shared_ptr<beam> (new beam(_nodes[1],_nodes[2]));
+    auto beamTMP3 = boost::shared_ptr<beam> (new beam(_nodes[2],_nodes[0]));
+    _beams.push_back(beamTMP1);
+    _beams.push_back(beamTMP2);
+    _beams.push_back(beamTMP3);
+  } else if (_beams.size() > 3) {
+    _beams[_beams.size()-1]->changeNode2(nodeTMP);
+    auto beamTMP(boost::shared_ptr<beam> (new beam(_nodes[_nodes.size()-1],_nodes[0])));
+    _beams.push_back(beamTMP);
+  }
+  _calculatedFrame=false;
+  return true;
 };
 
-void frame::calculateLength() {
-  _length = (_node1->c() - _node2->c()).norm();
+void frame::show() const {
+  unsigned int i=1;
+  BOOST_FOREACH(auto beamTMP, _beams) {
+    std::cout<<"Beam "<<i<<": ";
+    beamTMP->show();
+    i++;
+  }
 };
 
-void frame::changeNode1 (boost::shared_ptr<node> nodeT) {
-  _node1 = nodeT;
-  this->calculateLength();
+bool frame::checkBeams() const {
+  for (int i = 1; i < _beams.size(); i++) {
+    if (_beams[i-1]->node2() != _beams[i]->node1()) {
+      return false;
+    }
+  }
+  if (_beams[0]->node1() != _beams[_beams.size()-1]->node2()) {
+    return false;
+  }
+  
+  return true;
 };
 
-void frame::changeNode2 (boost::shared_ptr<node> nodeT) {
-  _node2 = nodeT;
-  this->calculateLength();
-};
-
-void frame::show() {
-  std::cout<<_node1->c()(0)<<" "<<_node1->c()(1)<<" "<<_node1->c()(2)<<"; ";
-  std::cout<<_node2->c()(0)<<" "<<_node2->c()(1)<<" "<<_node2->c()(2)<<"; ";
-  std::cout<<_length<<"[mm]; angles ";
-  std::cout<< _node1->angleGRAD()/2.0 << " ";
-  std::cout<< _node2->angleGRAD()/2.0 <<std::endl;
-}
-
-boost::shared_ptr<node> frame::node1() {
-  return _node1;
-}
-
-boost::shared_ptr<node> frame::node2() {
-  return _node2;
-}
-
-double frame::calculateAngle(boost::shared_ptr<frame> f) {
-  const Eigen::Vector3d a1 = (_node2->c() - _node1->c()).normalized();
-  const Eigen::Vector3d a2 = ((f->node2())->c() - (f->node1())->c()).normalized();
-  return acos(a1.dot(-a2));
-}
 
 double frame::widthA() const{return _widthA;}
 double frame::widthB() const{return _widthB;}

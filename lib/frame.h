@@ -21,28 +21,37 @@
 
 #pragma once
 
-#include "node.h"
+#include "beam.h"
 #include <boost/shared_ptr.hpp>
+
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Polygon_2.h>
 
 enum frameType {FRAME, SHUTTER, MULLION, BEAD};
 class frame {
   private:
-    boost::shared_ptr<node> _node1;
-    boost::shared_ptr<node> _node2;
-    double _length;
+    typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
+    typedef KCG::Point_2 PointCG;
+    typedef CGAL::Polygon_2<KCG> Polygon_2CG;
+    
+    
+    std::vector<boost::shared_ptr<node> > _nodes;
+    std::vector<boost::shared_ptr<beam> > _beams;
+    bool _calculatedFrame=false;
     double _height = 0;
     double _widthA=0.0, _widthB=0.0, _widthC=0.0;
     frameType _type=FRAME;
     
   public:
-    frame (boost::shared_ptr<node> node1, boost::shared_ptr<node> node2);
-    void changeNode1 (boost::shared_ptr<node> nodeT);
-    void changeNode2 (boost::shared_ptr<node> nodeT);
-    void calculateLength();
-    void show();
-    boost::shared_ptr<node> node1();
-    boost::shared_ptr<node> node2();
-    double calculateAngle(boost::shared_ptr<frame> f);
+    frame () {};
+    
+    bool addNode(Eigen::Vector3d nodeT);
+    bool checkBeams() const;
+    bool checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes) const;
+    bool calculated() const;
+    void show() const;
+    bool calculate();
+    
     double widthA() const;
     double widthB() const;
     double widthC() const;

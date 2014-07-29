@@ -33,6 +33,5 @@ class order {
     bool addConstr(boost::shared_ptr<constr> constrTMP);
     bool calculate();
     void show();
-    unsigned int size() const;
     boost::shared_ptr<constr> constrGet(unsigned int i);
 };

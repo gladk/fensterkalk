@@ -21,22 +21,22 @@
 
 #pragma once
 
-#include "frame.h"
+#include "node.h"
+#include <boost/shared_ptr.hpp>
 
-class constr {
-  typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
-  typedef KCG::Point_2 PointCG;
-  typedef CGAL::Polygon_2<KCG> Polygon_2CG;
-  
+class beam {
   private:
-    bool _calculatedConstr=false;
-    frame _mainFrame;
+    boost::shared_ptr<node> _node1;
+    boost::shared_ptr<node> _node2;
+    double _length;
     
   public:
-    constr () {};
-    bool calculated() const;
-    bool calculate();
-    bool checkFrames();
-    bool addNodeMainFrame(Eigen::Vector3d nodeTMP);
+    beam (boost::shared_ptr<node> node1, boost::shared_ptr<node> node2);
+    void changeNode1 (boost::shared_ptr<node> nodeT);
+    void changeNode2 (boost::shared_ptr<node> nodeT);
+    void calculateLength();
     void show();
+    boost::shared_ptr<node> node1();
+    boost::shared_ptr<node> node2();
+    double calculateAngle(boost::shared_ptr<beam> b);
 };

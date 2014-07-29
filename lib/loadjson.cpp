@@ -35,7 +35,7 @@ bool loadJson(std::string FNameI, boost::shared_ptr<order> orderCur) {
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".x"), 
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".y"), 
         pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".z"))));
-      if (not(constrTMP->addNode(nodeTMP))) {
+      if (not(constrTMP->addNodeMainFrame(nodeTMP))) {
         return false;
       }
     }
