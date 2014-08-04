@@ -35,3 +35,7 @@ bool constr::addNodeMainFrame(Eigen::Vector3d nodeTMP) {
 std::vector<boost::shared_ptr<node> > constr::mainFrameNodes() {
   return _mainFrame.nodes();
 }
+
+std::vector<boost::shared_ptr<node> > constr::mainFrameNodesInternA() {
+  return _mainFrame.nodesInternA();
+}

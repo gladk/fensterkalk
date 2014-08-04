@@ -21,5 +21,6 @@ class constrGui : public QGraphicsItem {
       QWidget * widget = 0) ;
     QRectF boundingRect() const;
     boost::shared_ptr<QPolygonF> _frameGui;
+    boost::shared_ptr<QPolygonF> _frameInternAGui;
     
 };

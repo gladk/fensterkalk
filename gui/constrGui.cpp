@@ -4,10 +4,16 @@
 
 constrGui::constrGui(boost::shared_ptr<constr> c) {
   _frameGui = boost::shared_ptr<QPolygonF> (new QPolygonF());
+  _frameInternAGui = boost::shared_ptr<QPolygonF> (new QPolygonF());
   
   std::vector<boost::shared_ptr<node> > nodesV = c->mainFrameNodes();
-    BOOST_FOREACH(const boost::shared_ptr<node> &nd, nodesV) {
+  std::vector<boost::shared_ptr<node> > nodesVInternA = c->mainFrameNodesInternA();
+  
+  unsigned int i=0;
+  BOOST_FOREACH(const auto &nd, nodesV) {
     *_frameGui << QPointF(nd->c()[0], -nd->c()[1]);
+    //*_frameInternAGui << QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
+    i++;
   }
 }
 

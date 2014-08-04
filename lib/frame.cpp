@@ -22,8 +22,7 @@
 #include <iostream>
 #include <boost/foreach.hpp>
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
+#include <CGAL/create_offset_polygons_2.h>
 
 bool frame::addNode(Eigen::Vector3d const nodeT) {
   auto nodeTMP = boost::shared_ptr<node> (new node(nodeT));
@@ -52,6 +51,7 @@ bool frame::addNode(Eigen::Vector3d const nodeT) {
     _beams.push_back(beamTMP);
   }
   _calculatedFrame=false;
+  calculate();
   return true;
 };
 
@@ -78,14 +78,6 @@ bool frame::checkBeams() const {
 };
 
 bool frame::checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes) const {
-  typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
-  typedef KCG::Point_2 PointCG;
-  typedef CGAL::Polygon_2<KCG> Polygon_2CG;
-  Polygon_2CG _frameCG;
-  for (int i = 0; i < nodes.size(); i++) {
-    _frameCG.push_back(PointCG(nodes[i]->c()[0],nodes[i]->c()[1]));
-  }
-  
   if (not(_frameCG.is_simple())) {
     return false;
   }
@@ -103,9 +95,40 @@ void frame::setGeometry(double wA, double wB, double wC, double h) {
   _widthB = wB;
   _widthC = wC;
   _height = h;
+  calculate();
 }
+
 void frame::setType(frameType t) {_type=t;}
- std::vector<boost::shared_ptr<node> > frame::nodes() {
-   std::vector<boost::shared_ptr<node> > nodesRet = _nodes;
+
+std::vector<boost::shared_ptr<node> > frame::nodes() {
+  std::vector<boost::shared_ptr<node> > nodesRet = _nodes;
   return nodesRet;
+}
+
+std::vector<boost::shared_ptr<node> > frame::nodesInternA() {
+  Polygon_2CG polyA;
+  nodesIntern(polyA, _widthA);
+  std::vector<boost::shared_ptr<node> > nodesRet;
+
+  for( auto vi = polyA.vertices_begin() ; vi != polyA.vertices_end() ; ++ vi ) {
+    auto nodeTMP = boost::shared_ptr<node> (new node(Eigen::Vector3d((*vi).x(),(*vi).y(),0)));
+    //std::cerr<<nodeTMP->c()(0)<< " "<<nodeTMP->c()(1)<< " "<<std::endl;
+    //nodesRet.push_back(nodeTMP);
+  }
+  return nodesRet;
+}
+
+void frame::nodesIntern(Polygon_2CG & poly, const double W) {
+  const KCG::FT offset = W;
+  auto inner_offset_polygons = CGAL::create_interior_skeleton_and_offset_polygons_2(offset,poly);
+  poly = *inner_offset_polygons[0];
+}
+
+bool frame::calculate() {
+  _frameCG.clear();
+  for (int i = 0; i < _nodes.size(); i++) {
+    _frameCG.push_back(PointCG(_nodes[i]->c()[0],_nodes[i]->c()[1]));
+  }
+  _calculatedFrame=true;
+  return true;
 }
