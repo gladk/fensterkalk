@@ -109,19 +109,19 @@ std::vector<boost::shared_ptr<node> > frame::nodesInternA() {
   Polygon_2CG polyA;
   nodesIntern(polyA, _widthA);
   std::vector<boost::shared_ptr<node> > nodesRet;
-
+  
   for( auto vi = polyA.vertices_begin() ; vi != polyA.vertices_end() ; ++ vi ) {
     auto nodeTMP = boost::shared_ptr<node> (new node(Eigen::Vector3d((*vi).x(),(*vi).y(),0)));
-    //std::cerr<<nodeTMP->c()(0)<< " "<<nodeTMP->c()(1)<< " "<<std::endl;
-    //nodesRet.push_back(nodeTMP);
+    nodesRet.push_back(nodeTMP);
   }
+  
   return nodesRet;
 }
 
 void frame::nodesIntern(Polygon_2CG & poly, const double W) {
   const KCG::FT offset = W;
-  auto inner_offset_polygons = CGAL::create_interior_skeleton_and_offset_polygons_2(offset,poly);
-  poly = *inner_offset_polygons[0];
+  auto inner_offset_polygons = CGAL::create_interior_skeleton_and_offset_polygons_2(offset,_frameCG)[0];
+  poly = *inner_offset_polygons;
 }
 
 bool frame::calculate() {

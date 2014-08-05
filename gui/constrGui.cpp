@@ -12,7 +12,7 @@ constrGui::constrGui(boost::shared_ptr<constr> c) {
   unsigned int i=0;
   BOOST_FOREACH(const auto &nd, nodesV) {
     *_frameGui << QPointF(nd->c()[0], -nd->c()[1]);
-    //*_frameInternAGui << QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
+    *_frameInternAGui << QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
     i++;
   }
 }
@@ -27,6 +27,7 @@ void constrGui::paint(QPainter * painter,
   painter->setPen(*penFrame);
   
   painter->drawConvexPolygon(*_frameGui);
+  painter->drawConvexPolygon(*_frameInternAGui);
 }
 
 QRectF constrGui::boundingRect() const{
