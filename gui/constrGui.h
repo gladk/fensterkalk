@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
+#include <QLineF>
 
 #include "constr.h"
 
@@ -22,5 +23,6 @@ class constrGui : public QGraphicsItem {
     QRectF boundingRect() const;
     boost::shared_ptr<QPolygonF> _frameGui;
     boost::shared_ptr<QPolygonF> _frameInternAGui;
+    QVector<QLineF> _frameInternASeal;
     
 };

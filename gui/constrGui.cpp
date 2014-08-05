@@ -11,8 +11,11 @@ constrGui::constrGui(boost::shared_ptr<constr> c) {
   
   unsigned int i=0;
   BOOST_FOREACH(const auto &nd, nodesV) {
-    *_frameGui << QPointF(nd->c()[0], -nd->c()[1]);
-    *_frameInternAGui << QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
+    const QPointF p1 = QPointF(nd->c()[0], -nd->c()[1]);
+    const QPointF p2 = QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
+    *_frameGui << p1;
+    *_frameInternAGui << p2;
+    _frameInternASeal.push_back(QLineF(p1, p2));
     i++;
   }
 }
@@ -23,11 +26,12 @@ void constrGui::paint(QPainter * painter,
   painter->setBrush(Qt::white);
   
   QPen* penFrame = new QPen();
-  penFrame->setWidth(15.0);
+  penFrame->setWidth(10.0);
   painter->setPen(*penFrame);
   
   painter->drawConvexPolygon(*_frameGui);
   painter->drawConvexPolygon(*_frameInternAGui);
+  painter->drawLines(_frameInternASeal);
 }
 
 QRectF constrGui::boundingRect() const{
