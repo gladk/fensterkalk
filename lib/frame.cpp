@@ -21,7 +21,6 @@
 #include "frame.h"
 #include <iostream>
 #include <boost/foreach.hpp>
-
 #include <CGAL/create_offset_polygons_2.h>
 
 bool frame::addNode(Eigen::Vector3d const nodeT) {
