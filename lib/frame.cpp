@@ -114,7 +114,6 @@ std::vector<boost::shared_ptr<node> > frame::nodesInternA() {
     auto nodeTMP = boost::shared_ptr<node> (new node(Eigen::Vector3d((*vi).x(),(*vi).y(),0)));
     nodesRet.push_back(nodeTMP);
   }
-  
   return nodesRet;
 }
 

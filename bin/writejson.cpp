@@ -71,7 +71,7 @@ void writejson() {
   
   
   BOOST_FOREACH(Eigen::Vector3d i, nodes_read) {
-    std::cerr<<i(0)<< " " << i(1) << " " << i(2) <<std::endl;
+    std::cout<<i(0)<< " " << i(1) << " " << i(2) <<std::endl;
   }
 }
 
