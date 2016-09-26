@@ -26,6 +26,7 @@
 #include <Eigen/Core>
 
 #include <vector>
+#include <iostream>
 
 using boost::property_tree::ptree;
 using boost::property_tree::read_json;
