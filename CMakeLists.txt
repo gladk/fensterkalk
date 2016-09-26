@@ -5,10 +5,9 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cMake")
 INCLUDE(GNUInstallDirs)
 
 #C+11 support
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
 #===========================================================
-# Add possibility to use local boost installation (e.g. -DLocalBoost=1.46.1)
-FIND_PACKAGE(Boost ${LocalBoost} COMPONENTS program_options filesystem system regex iostreams log log_setup thread REQUIRED)
+FIND_PACKAGE(Boost COMPONENTS program_options filesystem system regex iostreams log log_setup thread REQUIRED)
 INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ADD_DEFINITIONS( "-DBOOST_LOG_DYN_LINK" )
