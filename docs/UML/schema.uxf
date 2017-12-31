@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>50</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
+Package::FatClass
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>80</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>node
+--
+- _c: Eigen3::Vector3d
+- _angle: double
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
