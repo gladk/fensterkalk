@@ -75,5 +75,5 @@ private:
   QGraphicsScene *scene;
   std::shared_ptr<QGraphicsPolygonItem> poly1;
   std::shared_ptr<constrGui> constr1;
-  std::shared_ptr<order> orderCur;
+  std::shared_ptr<Order> orderCur;
 };

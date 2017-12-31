@@ -22,12 +22,12 @@
 
 #include "constr.h"
 
-class order {
+class Order {
 private:
   std::vector<std::shared_ptr<Constr>> _constr;
 
 public:
-  order();
+  Order();
   std::shared_ptr<Constr> addConstr();
   bool addConstr(std::shared_ptr<Constr> constrTMP);
   bool calculate();

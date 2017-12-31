@@ -18,23 +18,23 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "order.h"
+#include <order.h>
 #include <boost/foreach.hpp>
 
-order::order(){};
+Order::Order(){};
 
-std::shared_ptr<Constr> order::addConstr() {
+std::shared_ptr<Constr> Order::addConstr() {
   std::shared_ptr<Constr> constrTMP = std::shared_ptr<Constr>(new Constr());
   _constr.push_back(constrTMP);
   return constrTMP;
 };
 
-bool order::addConstr(std::shared_ptr<Constr> constrTMP) {
+bool Order::addConstr(std::shared_ptr<Constr> constrTMP) {
   _constr.push_back(constrTMP);
   return true;
 };
 
-bool order::calculate() {
+bool Order::calculate() {
   BOOST_FOREACH (std::shared_ptr<Constr> constrTmp, _constr) {
     if (not(constrTmp->calculated())) {
       if (not(constrTmp->calculate())) {
@@ -45,7 +45,7 @@ bool order::calculate() {
   return true;
 };
 
-void order::show() {
+void Order::show() {
   unsigned int i = 1;
   BOOST_FOREACH (std::shared_ptr<Constr> constrTmp, _constr) {
     std::cout << "===================" << std::endl
@@ -55,7 +55,7 @@ void order::show() {
   }
 };
 
-std::shared_ptr<Constr> order::constrGet(unsigned int i) {
+std::shared_ptr<Constr> Order::constrGet(unsigned int i) {
   if (i < _constr.size() and i >= 0) {
     return _constr[i];
   } else {

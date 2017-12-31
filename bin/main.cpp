@@ -22,7 +22,7 @@
 #include "config.h"
 #include "loadjson.h"
 #include "log.h"
-#include "order.h"
+#include <order.h>
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -75,7 +75,7 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
   std::shared_ptr<configopt> cfgPrm;
   cfgPrm = std::shared_ptr<configopt>(new configopt(configFileName));
 
-  std::shared_ptr<order> orderCur = std::shared_ptr<order>(new order());
+  std::shared_ptr<Order> orderCur = std::shared_ptr<Order>(new Order());
 
   if (not(loadJson(cfgPrm->FNameI(), orderCur))) {
     std::cerr << "Loaded construction is wrong!" << std::endl;

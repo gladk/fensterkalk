@@ -18,7 +18,7 @@ MainWindow::MainWindow() {
 
   setCurrentFile("");
   setUnifiedTitleAndToolBarOnMac(true);
-  orderCur = std::shared_ptr<order>(new order());
+  orderCur = std::shared_ptr<Order>(new Order());
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {

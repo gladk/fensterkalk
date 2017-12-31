@@ -23,7 +23,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-#include "order.h"
+#include <order.h>
 #include <vector>
 
-bool loadJson(std::string FNameI, std::shared_ptr<order> orderCur);
+bool loadJson(std::string FNameI, std::shared_ptr<Order> orderCur);

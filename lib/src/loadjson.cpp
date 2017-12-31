@@ -20,7 +20,7 @@
 
 #include <loadjson.h>
 
-bool loadJson(std::string FNameI, std::shared_ptr<order> orderCur) {
+bool loadJson(std::string FNameI, std::shared_ptr<Order> orderCur) {
   using boost::property_tree::ptree;
   using boost::property_tree::read_json;
   ptree pt;
