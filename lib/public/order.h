@@ -26,7 +26,7 @@
 class order {
   private:
     std::vector<boost::shared_ptr<constr> > _constr;
-    
+
   public:
     order ();
     boost::shared_ptr <constr> addConstr();

@@ -20,34 +20,15 @@
 
 #include "node.h"
 #include <iostream>
-#include <cmath>
 
-node::node(Eigen::Vector3d c, double angle) {
-  _c = c;
-  _angle = angle;
-};
+node::node(Eigen::Vector3d c, double angle) : _c(c), _angle(angle){};
 
-node::node(Eigen::Vector3d c) {
-  _c = c;
-  _angle = -1;
-};
+node::node(Eigen::Vector3d c) _c(c), _angle(-1){};
 
-Eigen::Vector3d node::c() {
-  return _c;
-};
+Eigen::Vector3d node::c() { return _c; };
 
-void node::c(Eigen::Vector3d c) {
-  _c=c;
-};
+void node::c(Eigen::Vector3d c) { _c = c; };
 
-void node::angle(double angle) {
-  _angle=angle;
-};
+void node::angle(double angle) { _angle = angle; };
 
-double node::angle() {
-  return _angle;
-};
-
-double node::angleGRAD() {
-  return _angle*180.0/M_PI;
-}
+double node::angle() { return _angle; };

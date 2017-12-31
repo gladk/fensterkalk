@@ -18,7 +18,6 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #pragma once
 
 #include <Eigen/Dense>
@@ -26,16 +25,16 @@
 #include <vector>
 
 class node {
-  private:
-    Eigen::Vector3d _c;
-    double _angle;
-    
-  public:
-    node(Eigen::Vector3d c, double angle);
-    node(Eigen::Vector3d c);
-    Eigen::Vector3d c();
-    double angle();
-    double angleGRAD();
-    void c(Eigen::Vector3d c);
-    void angle(double angle);
+private:
+  Eigen::Vector3d _c;
+  double _angle;
+
+public:
+  node(Eigen::Vector3d c, double angle);
+  node(Eigen::Vector3d c);
+  Eigen::Vector3d c();
+  double angle();
+  double angleInDegrees();
+  void c(Eigen::Vector3d c);
+  void angle(double angle);
 };

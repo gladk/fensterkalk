@@ -27,38 +27,35 @@ beam::beam(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2) {
   this->calculateLength();
 };
 
-void beam::calculateLength() {
-  _length = (_node1->c() - _node2->c()).norm();
-};
+void beam::calculateLength() { _length = (_node1->c() - _node2->c()).norm(); };
 
-void beam::changeNode1 (boost::shared_ptr<node> nodeT) {
+void beam::changeNode1(boost::shared_ptr<node> nodeT) {
   _node1 = nodeT;
   this->calculateLength();
 };
 
-void beam::changeNode2 (boost::shared_ptr<node> nodeT) {
+void beam::changeNode2(boost::shared_ptr<node> nodeT) {
   _node2 = nodeT;
   this->calculateLength();
 };
 
 void beam::show() {
-  std::cout<<_node1->c()(0)<<" "<<_node1->c()(1)<<" "<<_node1->c()(2)<<"; ";
-  std::cout<<_node2->c()(0)<<" "<<_node2->c()(1)<<" "<<_node2->c()(2)<<"; ";
-  std::cout<<_length<<"[mm]; angles ";
-  std::cout<< _node1->angleGRAD()/2.0 << " ";
-  std::cout<< _node2->angleGRAD()/2.0 <<std::endl;
+  std::cout << _node1->c()(0) << " " << _node1->c()(1) << " " << _node1->c()(2)
+            << "; ";
+  std::cout << _node2->c()(0) << " " << _node2->c()(1) << " " << _node2->c()(2)
+            << "; ";
+  std::cout << _length << "[mm]; angles ";
+  std::cout << _node1->angle() * 180.0 / M_PI / 2.0 << " ";
+  std::cout << _node2->angle() * 180.0 / M_PI / 2.0 << std::endl;
 }
 
-boost::shared_ptr<node> beam::node1() {
-  return _node1;
-}
+boost::shared_ptr<node> beam::node1() { return _node1; }
 
-boost::shared_ptr<node> beam::node2() {
-  return _node2;
-}
+boost::shared_ptr<node> beam::node2() { return _node2; }
 
 double beam::calculateAngle(boost::shared_ptr<beam> f) {
   const Eigen::Vector3d a1 = (_node2->c() - _node1->c()).normalized();
-  const Eigen::Vector3d a2 = ((f->node2())->c() - (f->node1())->c()).normalized();
+  const Eigen::Vector3d a2 =
+      ((f->node2())->c() - (f->node1())->c()).normalized();
   return acos(a1.dot(-a2));
 }
