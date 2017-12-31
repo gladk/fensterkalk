@@ -1,5 +1,6 @@
 *.swp
 .vscode
+build
 lib/old
 FensterKalk.pro
 FensterKalk.pro.user
