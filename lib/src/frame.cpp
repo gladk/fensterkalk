@@ -38,16 +38,16 @@ bool frame::addNode(Eigen::Vector3d const nodeT) {
 
   _nodes.push_back(nodeTMP);
   if (_nodes.size() == 3) {
-    auto beamTMP1 = std::shared_ptr<beam>(new beam(_nodes[0], _nodes[1]));
-    auto beamTMP2 = std::shared_ptr<beam>(new beam(_nodes[1], _nodes[2]));
-    auto beamTMP3 = std::shared_ptr<beam>(new beam(_nodes[2], _nodes[0]));
+    auto beamTMP1 = std::shared_ptr<Beam>(new Beam(_nodes[0], _nodes[1]));
+    auto beamTMP2 = std::shared_ptr<Beam>(new Beam(_nodes[1], _nodes[2]));
+    auto beamTMP3 = std::shared_ptr<Beam>(new Beam(_nodes[2], _nodes[0]));
     _beams.push_back(beamTMP1);
     _beams.push_back(beamTMP2);
     _beams.push_back(beamTMP3);
   } else if (_beams.size() > 3) {
     _beams[_beams.size() - 1]->replaceNode(nodeTMP, Side::RIGHT);
     auto beamTMP(
-        std::shared_ptr<beam>(new beam(_nodes[_nodes.size() - 1], _nodes[0])));
+        std::shared_ptr<Beam>(new Beam(_nodes[_nodes.size() - 1], _nodes[0])));
     _beams.push_back(beamTMP);
   }
   _calculatedFrame = false;

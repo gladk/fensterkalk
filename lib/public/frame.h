@@ -34,7 +34,7 @@ class frame {
 private:
   Polygon_2CG _frameCG;
   std::vector<std::shared_ptr<Node>> _nodes;
-  std::vector<std::shared_ptr<beam>> _beams;
+  std::vector<std::shared_ptr<Beam>> _beams;
   bool _calculatedFrame = false;
   double _height = 0;
   double _widthA = 58.0, _widthB = 0.0, _widthC = 0.0;

@@ -21,15 +21,15 @@
 #include <beam.h>
 #include <iostream>
 
-beam::beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR) {
+Beam::Beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR) {
   _nodeL = nodeL;
   _nodeR = nodeR;
   this->calculateLength();
 };
 
-void beam::calculateLength() { _length = (_nodeL->c() - _nodeR->c()).norm(); };
+void Beam::calculateLength() { _length = (_nodeL->c() - _nodeR->c()).norm(); };
 
-void beam::replaceNode(std::shared_ptr<Node> nodeT, Side side) {
+void Beam::replaceNode(std::shared_ptr<Node> nodeT, Side side) {
   if (side == Side::LEFT) {
     _nodeL = nodeT;
   } else {
@@ -38,7 +38,7 @@ void beam::replaceNode(std::shared_ptr<Node> nodeT, Side side) {
   this->calculateLength();
 };
 
-void beam::show() const {
+void Beam::show() const {
   std::cout << _nodeL->c()(0) << " " << _nodeL->c()(1) << " " << _nodeL->c()(2)
             << "; ";
   std::cout << _nodeR->c()(0) << " " << _nodeR->c()(1) << " " << _nodeR->c()(2)
@@ -48,7 +48,7 @@ void beam::show() const {
   std::cout << _nodeR->angle() * 180.0 / M_PI / 2.0 << std::endl;
 }
 
-std::shared_ptr<Node> beam::getNode(Side side) const {
+std::shared_ptr<Node> Beam::getNode(Side side) const {
   if (side == Side::LEFT) {
     return _nodeL;
   } else {
@@ -56,7 +56,7 @@ std::shared_ptr<Node> beam::getNode(Side side) const {
   }
 }
 
-double beam::calculateAngle(std::shared_ptr<beam> f) const {
+double Beam::calculateAngle(std::shared_ptr<Beam> f) const {
   const Eigen::Vector3d a1 = (_nodeR->c() - _nodeL->c()).normalized();
   const Eigen::Vector3d a2 =
       ((f->getNode(Side::RIGHT))->c() - (f->getNode(Side::LEFT))->c())

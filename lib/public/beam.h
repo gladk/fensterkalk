@@ -20,16 +20,16 @@
 
 #pragma once
 
-/** beam class which keeps to nodes to calculate distance between them  */
+/** Beam class which keeps to nodes to calculate distance between them  */
 
 #include <memory>
 #include <node.h>
 
 enum class Side { LEFT, RIGHT };
 
-class beam {
+class Beam {
 public:
-  beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR);
+  Beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR);
   /**
    * @brief Replace one of nodes by another one
    * */
@@ -39,7 +39,7 @@ public:
    * */
   void calculateLength();
   /**
-   * @brief Output the information about this beam
+   * @brief Output the information about this Beam
    * */
   void show() const;
   /**
@@ -49,7 +49,7 @@ public:
   /**
    * @brief Calculate the angle and return it
    * */
-  double calculateAngle(std::shared_ptr<beam>) const;
+  double calculateAngle(std::shared_ptr<Beam>) const;
 
 private:
   std::shared_ptr<Node> _nodeL;
