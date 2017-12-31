@@ -45,7 +45,7 @@ bool frame::addNode(Eigen::Vector3d const nodeT) {
     _beams.push_back(beamTMP2);
     _beams.push_back(beamTMP3);
   } else if (_beams.size() > 3) {
-    _beams[_beams.size() - 1]->changeNode2(nodeTMP);
+    _beams[_beams.size() - 1]->changeNode(nodeTMP, Side::RIGHT);
     auto beamTMP(std::shared_ptr<beam>(
         new beam(_nodes[_nodes.size() - 1], _nodes[0])));
     _beams.push_back(beamTMP);
@@ -66,11 +66,11 @@ void frame::show() const {
 
 bool frame::checkBeams() const {
   for (int i = 1; i < _beams.size(); i++) {
-    if (_beams[i - 1]->node2() != _beams[i]->node1()) {
+    if (_beams[i - 1]->nodeR() != _beams[i]->nodeL()) {
       return false;
     }
   }
-  if (_beams[0]->node1() != _beams[_beams.size() - 1]->node2()) {
+  if (_beams[0]->nodeL() != _beams[_beams.size() - 1]->nodeR()) {
     return false;
   }
 

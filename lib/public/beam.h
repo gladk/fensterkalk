@@ -23,19 +23,23 @@
 #include <node.h>
 #include <memory>
 
+enum class Side {
+  LEFT,
+  RIGHT
+};
+
 class beam {
 public:
-  beam(std::shared_ptr<node> node1, std::shared_ptr<node> node2);
-  void changeNode1(std::shared_ptr<node> nodeT);
-  void changeNode2(std::shared_ptr<node> nodeT);
+  beam(std::shared_ptr<node> nodeL, std::shared_ptr<node> nodeR);
+  void changeNode(std::shared_ptr<node> nodeT, Side s = Side::LEFT);
   void calculateLength();
   void show();
-  std::shared_ptr<node> node1();
-  std::shared_ptr<node> node2();
+  std::shared_ptr<node> nodeL();
+  std::shared_ptr<node> nodeR();
   double calculateAngle(std::shared_ptr<beam> b);
 
 private:
-  std::shared_ptr<node> _node1;
-  std::shared_ptr<node> _node2;
+  std::shared_ptr<node> _nodeL;
+  std::shared_ptr<node> _nodeR;
   double _length;
 };

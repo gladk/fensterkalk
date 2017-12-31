@@ -18,44 +18,43 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "beam.h"
+#include <beam.h>
 #include <iostream>
 
-beam::beam(std::shared_ptr<node> node1, std::shared_ptr<node> node2) {
-  _node1 = node1;
-  _node2 = node2;
+beam::beam(std::shared_ptr<node> nodeL, std::shared_ptr<node> nodeR) {
+  _nodeL = nodeL;
+  _nodeR = nodeR;
   this->calculateLength();
 };
 
-void beam::calculateLength() { _length = (_node1->c() - _node2->c()).norm(); };
+void beam::calculateLength() { _length = (_nodeL->c() - _nodeR->c()).norm(); };
 
-void beam::changeNode1(std::shared_ptr<node> nodeT) {
-  _node1 = nodeT;
-  this->calculateLength();
-};
-
-void beam::changeNode2(std::shared_ptr<node> nodeT) {
-  _node2 = nodeT;
+void beam::changeNode(std::shared_ptr<node> nodeT, Side side) {
+  if (side == Side::LEFT) {
+  _nodeL = nodeT;
+  } else {
+    _nodeR = nodeT;
+  }
   this->calculateLength();
 };
 
 void beam::show() {
-  std::cout << _node1->c()(0) << " " << _node1->c()(1) << " " << _node1->c()(2)
+  std::cout << _nodeL->c()(0) << " " << _nodeL->c()(1) << " " << _nodeL->c()(2)
             << "; ";
-  std::cout << _node2->c()(0) << " " << _node2->c()(1) << " " << _node2->c()(2)
+  std::cout << _nodeR->c()(0) << " " << _nodeR->c()(1) << " " << _nodeR->c()(2)
             << "; ";
   std::cout << _length << "[mm]; angles ";
-  std::cout << _node1->angle() * 180.0 / M_PI / 2.0 << " ";
-  std::cout << _node2->angle() * 180.0 / M_PI / 2.0 << std::endl;
+  std::cout << _nodeL->angle() * 180.0 / M_PI / 2.0 << " ";
+  std::cout << _nodeR->angle() * 180.0 / M_PI / 2.0 << std::endl;
 }
 
-std::shared_ptr<node> beam::node1() { return _node1; }
+std::shared_ptr<node> beam::nodeL() { return _nodeL; }
 
-std::shared_ptr<node> beam::node2() { return _node2; }
+std::shared_ptr<node> beam::nodeR() { return _nodeR; }
 
 double beam::calculateAngle(std::shared_ptr<beam> f) {
-  const Eigen::Vector3d a1 = (_node2->c() - _node1->c()).normalized();
+  const Eigen::Vector3d a1 = (_nodeR->c() - _nodeL->c()).normalized();
   const Eigen::Vector3d a2 =
-      ((f->node2())->c() - (f->node1())->c()).normalized();
+      ((f->nodeR())->c() - (f->nodeL())->c()).normalized();
   return acos(a1.dot(-a2));
 }
