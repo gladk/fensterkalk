@@ -20,14 +20,14 @@
 
 #pragma once
 
-#include "frame.h"
+#include <frame.h>
 
 class constr {
-  friend class frame;
+  friend class Frame;
 
 private:
   bool _calculatedConstr = false;
-  frame _mainFrame;
+  Frame _mainFrame;
 
 public:
   constr(){};

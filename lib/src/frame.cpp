@@ -23,7 +23,7 @@
 #include <frame.h>
 #include <iostream>
 
-bool frame::addNode(Eigen::Vector3d const nodeT) {
+bool Frame::addNode(Eigen::Vector3d const nodeT) {
   auto nodeTMP = std::shared_ptr<Node>(new Node(nodeT));
 
   // Create temporarly _nodeVector to check, whether polygon is simple
@@ -55,7 +55,7 @@ bool frame::addNode(Eigen::Vector3d const nodeT) {
   return true;
 };
 
-void frame::show() const {
+void Frame::show() const {
   unsigned int i = 1;
   BOOST_FOREACH (auto beamTMP, _beams) {
     std::cout << "Beam " << i << ": ";
@@ -64,7 +64,7 @@ void frame::show() const {
   }
 };
 
-bool frame::checkBeams() const {
+bool Frame::checkBeams() const {
   for (int i = 1; i < _beams.size(); i++) {
     if (_beams[i - 1]->getNode(Side::RIGHT) != _beams[i]->getNode(Side::LEFT)) {
       return false;
@@ -78,21 +78,21 @@ bool frame::checkBeams() const {
   return true;
 };
 
-bool frame::checkIsSimple(
+bool Frame::checkIsSimple(
     const std::vector<std::shared_ptr<Node>> &nodes) const {
-  if (not(_frameCG.is_simple())) {
+  if (not(_FrameCG.is_simple())) {
     return false;
   }
   return true;
 }
 
-double frame::widthA() const { return _widthA; }
-double frame::widthB() const { return _widthB; }
-double frame::widthC() const { return _widthC; }
-double frame::height() const { return _height; }
-frameType frame::type() const { return _type; }
+double Frame::widthA() const { return _widthA; }
+double Frame::widthB() const { return _widthB; }
+double Frame::widthC() const { return _widthC; }
+double Frame::height() const { return _height; }
+FrameType Frame::type() const { return _type; }
 
-void frame::setGeometry(double wA, double wB, double wC, double h) {
+void Frame::setGeometry(double wA, double wB, double wC, double h) {
   _widthA = wA;
   _widthB = wB;
   _widthC = wC;
@@ -100,14 +100,14 @@ void frame::setGeometry(double wA, double wB, double wC, double h) {
   calculate();
 }
 
-void frame::setType(frameType t) { _type = t; }
+void Frame::setType(FrameType t) { _type = t; }
 
-std::vector<std::shared_ptr<Node>> frame::nodes() {
+std::vector<std::shared_ptr<Node>> Frame::nodes() {
   std::vector<std::shared_ptr<Node>> nodesRet = _nodes;
   return nodesRet;
 }
 
-std::vector<std::shared_ptr<Node>> frame::nodesInternA() {
+std::vector<std::shared_ptr<Node>> Frame::nodesInternA() {
   Polygon_2CG polyA;
   nodesIntern(polyA, _widthA);
   std::vector<std::shared_ptr<Node>> nodesRet;
@@ -120,17 +120,17 @@ std::vector<std::shared_ptr<Node>> frame::nodesInternA() {
   return nodesRet;
 }
 
-void frame::nodesIntern(Polygon_2CG &poly, const double W) {
+void Frame::nodesIntern(Polygon_2CG &poly, const double W) {
   const KCG::FT offset = W;
   auto inner_offset_polygons =
-      CGAL::create_interior_skeleton_and_offset_polygons_2(offset, _frameCG)[0];
+      CGAL::create_interior_skeleton_and_offset_polygons_2(offset, _FrameCG)[0];
   poly = *inner_offset_polygons;
 }
 
-bool frame::calculate() {
-  _frameCG.clear();
+bool Frame::calculate() {
+  _FrameCG.clear();
   for (int i = 0; i < _nodes.size(); i++) {
-    _frameCG.push_back(PointCG(_nodes[i]->c()[0], _nodes[i]->c()[1]));
+    _FrameCG.push_back(PointCG(_nodes[i]->c()[0], _nodes[i]->c()[1]));
   }
   _calculatedFrame = true;
   return true;
