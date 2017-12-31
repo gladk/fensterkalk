@@ -18,7 +18,7 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "frame.h"
+#include <frame.h>
 #include <CGAL/create_offset_polygons_2.h>
 #include <boost/foreach.hpp>
 #include <iostream>
@@ -45,9 +45,9 @@ bool frame::addNode(Eigen::Vector3d const nodeT) {
     _beams.push_back(beamTMP2);
     _beams.push_back(beamTMP3);
   } else if (_beams.size() > 3) {
-    _beams[_beams.size() - 1]->changeNode(nodeTMP, Side::RIGHT);
-    auto beamTMP(std::shared_ptr<beam>(
-        new beam(_nodes[_nodes.size() - 1], _nodes[0])));
+    _beams[_beams.size() - 1]->replaceNode(nodeTMP, Side::RIGHT);
+    auto beamTMP(
+        std::shared_ptr<beam>(new beam(_nodes[_nodes.size() - 1], _nodes[0])));
     _beams.push_back(beamTMP);
   }
   _calculatedFrame = false;

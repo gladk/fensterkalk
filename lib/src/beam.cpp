@@ -29,9 +29,9 @@ beam::beam(std::shared_ptr<node> nodeL, std::shared_ptr<node> nodeR) {
 
 void beam::calculateLength() { _length = (_nodeL->c() - _nodeR->c()).norm(); };
 
-void beam::changeNode(std::shared_ptr<node> nodeT, Side side) {
+void beam::replaceNode(std::shared_ptr<node> nodeT, Side side) {
   if (side == Side::LEFT) {
-  _nodeL = nodeT;
+    _nodeL = nodeT;
   } else {
     _nodeR = nodeT;
   }

@@ -20,18 +20,15 @@
 
 #pragma once
 
-#include <node.h>
 #include <memory>
+#include <node.h>
 
-enum class Side {
-  LEFT,
-  RIGHT
-};
+enum class Side { LEFT, RIGHT };
 
 class beam {
 public:
   beam(std::shared_ptr<node> nodeL, std::shared_ptr<node> nodeR);
-  void changeNode(std::shared_ptr<node> nodeT, Side s = Side::LEFT);
+  void replaceNode(std::shared_ptr<node> nodeT, Side s = Side::LEFT);
   void calculateLength();
   void show();
   std::shared_ptr<node> nodeL();
