@@ -20,15 +20,10 @@
 
 #pragma once
 
-#include "node.h"
 #include <boost/shared_ptr.hpp>
+#include <node.h>
 
 class beam {
-private:
-  boost::shared_ptr<node> _node1;
-  boost::shared_ptr<node> _node2;
-  double _length;
-
 public:
   beam(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2);
   void changeNode1(boost::shared_ptr<node> nodeT);
@@ -38,4 +33,9 @@ public:
   boost::shared_ptr<node> node1();
   boost::shared_ptr<node> node2();
   double calculateAngle(boost::shared_ptr<beam> b);
+
+private:
+  boost::shared_ptr<node> _node1;
+  boost::shared_ptr<node> _node2;
+  double _length;
 };

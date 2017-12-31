@@ -5,7 +5,10 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cMake")
 INCLUDE(GNUInstallDirs)
 
 
-OPTION(BUILD_DOC "Build documentation" ON)
+#===========================================================
+# Options
+OPTION(BUILD_DOC "Build documentation" OFF)
+#===========================================================
 
 #C++14 support
 set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
@@ -24,25 +27,27 @@ ADD_DEFINITIONS( "${CGAL_DEFINITIONS}")
 FIND_PACKAGE(GMP REQUIRED)
 
 #===========================================================
-FIND_PACKAGE(Doxygen)
-IF (DOXYGEN_FOUND)
-    # set input and output files
-    SET(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
-    SET(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+IF (BUILD_DOC)
+  FIND_PACKAGE(Doxygen)
+  IF (DOXYGEN_FOUND)
+      # set input and output files
+      SET(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
+      SET(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
-    # request to configure the file
-    CONFIGURE_FILE(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-    MESSAGE("Doxygen build started")
+      # request to configure the file
+      CONFIGURE_FILE(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+      MESSAGE("Doxygen build started")
 
-    # note the option ALL which allows to build the docs together with the application
-    ADD_CUSTOM_TARGET( doc_doxygen ALL
-        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Generating API documentation with Doxygen"
-        VERBATIM )
-ELSE (DOXYGEN_FOUND)
-  MESSAGE("Doxygen need to be installed to generate the doxygen documentation")
-ENDIF (DOXYGEN_FOUND)
+      # note the option ALL which allows to build the docs together with the application
+      ADD_CUSTOM_TARGET( doc_doxygen ALL
+          COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+          COMMENT "Generating API documentation with Doxygen"
+          VERBATIM )
+  ELSE (DOXYGEN_FOUND)
+    MESSAGE("Doxygen need to be installed to generate the doxygen documentation")
+  ENDIF (DOXYGEN_FOUND)
+ENDIF (BUILD_DOC)
 #===========================================================
 SET(CMAKE_SKIP_BUILD_RPATH FALSE)
 SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
