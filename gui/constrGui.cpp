@@ -2,12 +2,12 @@
 #include <boost/foreach.hpp>
 #include <iostream>
 
-constrGui::constrGui(boost::shared_ptr<constr> c) {
-  _frameGui = boost::shared_ptr<QPolygonF>(new QPolygonF());
-  _frameInternAGui = boost::shared_ptr<QPolygonF>(new QPolygonF());
+constrGui::constrGui(std::shared_ptr<constr> c) {
+  _frameGui = std::shared_ptr<QPolygonF>(new QPolygonF());
+  _frameInternAGui = std::shared_ptr<QPolygonF>(new QPolygonF());
 
-  std::vector<boost::shared_ptr<node>> nodesV = c->mainFrameNodes();
-  std::vector<boost::shared_ptr<node>> nodesVInternA =
+  std::vector<std::shared_ptr<node>> nodesV = c->mainFrameNodes();
+  std::vector<std::shared_ptr<node>> nodesVInternA =
       c->mainFrameNodesInternA();
 
   unsigned int i = 0;

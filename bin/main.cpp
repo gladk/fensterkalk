@@ -28,7 +28,7 @@ namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
 int main(int ac, char *av[]) {
-  boost::shared_ptr<logs> log(new logs());
+  std::shared_ptr<logs> log(new logs());
   std::string configFileName;
 
   std::cout << "\n\
@@ -72,10 +72,10 @@ This program comes with ABSOLUTELY NO WARRANTY.\n\
     std::cerr << "Exception of unknown type!\n";
     exit(EXIT_FAILURE);
   }
-  boost::shared_ptr<configopt> cfgPrm;
-  cfgPrm = boost::shared_ptr<configopt>(new configopt(configFileName));
+  std::shared_ptr<configopt> cfgPrm;
+  cfgPrm = std::shared_ptr<configopt>(new configopt(configFileName));
 
-  boost::shared_ptr<order> orderCur = boost::shared_ptr<order>(new order());
+  std::shared_ptr<order> orderCur = std::shared_ptr<order>(new order());
 
   if (not(loadJson(cfgPrm->FNameI(), orderCur))) {
     std::cerr << "Loaded construction is wrong!" << std::endl;

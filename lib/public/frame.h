@@ -20,8 +20,7 @@
 
 #pragma once
 
-#include "beam.h"
-#include <boost/shared_ptr.hpp>
+#include <beam.h>
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
@@ -34,8 +33,8 @@ class frame {
 
 private:
   Polygon_2CG _frameCG;
-  std::vector<boost::shared_ptr<node>> _nodes;
-  std::vector<boost::shared_ptr<beam>> _beams;
+  std::vector<std::shared_ptr<node>> _nodes;
+  std::vector<std::shared_ptr<beam>> _beams;
   bool _calculatedFrame = false;
   double _height = 0;
   double _widthA = 58.0, _widthB = 0.0, _widthC = 0.0;
@@ -46,7 +45,7 @@ public:
 
   bool addNode(Eigen::Vector3d nodeT);
   bool checkBeams() const;
-  bool checkIsSimple(const std::vector<boost::shared_ptr<node>> &nodes) const;
+  bool checkIsSimple(const std::vector<std::shared_ptr<node>> &nodes) const;
   bool calculated() const;
   void show() const;
   bool calculate();
@@ -58,7 +57,7 @@ public:
   frameType type() const;
   void setGeometry(double wA, double wB, double wC, double h);
   void setType(frameType t);
-  std::vector<boost::shared_ptr<node>> nodes();
-  std::vector<boost::shared_ptr<node>> nodesInternA();
+  std::vector<std::shared_ptr<node>> nodes();
+  std::vector<std::shared_ptr<node>> nodesInternA();
   void nodesIntern(Polygon_2CG &poly, const double W);
 };

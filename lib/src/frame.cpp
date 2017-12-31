@@ -24,7 +24,7 @@
 #include <iostream>
 
 bool frame::addNode(Eigen::Vector3d const nodeT) {
-  auto nodeTMP = boost::shared_ptr<node>(new node(nodeT));
+  auto nodeTMP = std::shared_ptr<node>(new node(nodeT));
 
   // Create temporarly _nodeVector to check, whether polygon is simple
   if (_nodes.size() > 1) {
@@ -38,15 +38,15 @@ bool frame::addNode(Eigen::Vector3d const nodeT) {
 
   _nodes.push_back(nodeTMP);
   if (_nodes.size() == 3) {
-    auto beamTMP1 = boost::shared_ptr<beam>(new beam(_nodes[0], _nodes[1]));
-    auto beamTMP2 = boost::shared_ptr<beam>(new beam(_nodes[1], _nodes[2]));
-    auto beamTMP3 = boost::shared_ptr<beam>(new beam(_nodes[2], _nodes[0]));
+    auto beamTMP1 = std::shared_ptr<beam>(new beam(_nodes[0], _nodes[1]));
+    auto beamTMP2 = std::shared_ptr<beam>(new beam(_nodes[1], _nodes[2]));
+    auto beamTMP3 = std::shared_ptr<beam>(new beam(_nodes[2], _nodes[0]));
     _beams.push_back(beamTMP1);
     _beams.push_back(beamTMP2);
     _beams.push_back(beamTMP3);
   } else if (_beams.size() > 3) {
     _beams[_beams.size() - 1]->changeNode2(nodeTMP);
-    auto beamTMP(boost::shared_ptr<beam>(
+    auto beamTMP(std::shared_ptr<beam>(
         new beam(_nodes[_nodes.size() - 1], _nodes[0])));
     _beams.push_back(beamTMP);
   }
@@ -78,7 +78,7 @@ bool frame::checkBeams() const {
 };
 
 bool frame::checkIsSimple(
-    const std::vector<boost::shared_ptr<node>> &nodes) const {
+    const std::vector<std::shared_ptr<node>> &nodes) const {
   if (not(_frameCG.is_simple())) {
     return false;
   }
@@ -101,18 +101,18 @@ void frame::setGeometry(double wA, double wB, double wC, double h) {
 
 void frame::setType(frameType t) { _type = t; }
 
-std::vector<boost::shared_ptr<node>> frame::nodes() {
-  std::vector<boost::shared_ptr<node>> nodesRet = _nodes;
+std::vector<std::shared_ptr<node>> frame::nodes() {
+  std::vector<std::shared_ptr<node>> nodesRet = _nodes;
   return nodesRet;
 }
 
-std::vector<boost::shared_ptr<node>> frame::nodesInternA() {
+std::vector<std::shared_ptr<node>> frame::nodesInternA() {
   Polygon_2CG polyA;
   nodesIntern(polyA, _widthA);
-  std::vector<boost::shared_ptr<node>> nodesRet;
+  std::vector<std::shared_ptr<node>> nodesRet;
 
   for (auto vi = polyA.vertices_begin(); vi != polyA.vertices_end(); ++vi) {
-    auto nodeTMP = boost::shared_ptr<node>(
+    auto nodeTMP = std::shared_ptr<node>(
         new node(Eigen::Vector3d((*vi).x(), (*vi).y(), 0)));
     nodesRet.push_back(nodeTMP);
   }

@@ -18,7 +18,7 @@ MainWindow::MainWindow() {
 
   setCurrentFile("");
   setUnifiedTitleAndToolBarOnMac(true);
-  orderCur = boost::shared_ptr<order>(new order());
+  orderCur = std::shared_ptr<order>(new order());
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -54,7 +54,7 @@ void MainWindow::open() {
     if (constr1.get())
       scene->removeItem(constr1.get());
     constr1 =
-        boost::shared_ptr<constrGui>(new constrGui(orderCur->constrGet(0)));
+        std::shared_ptr<constrGui>(new constrGui(orderCur->constrGet(0)));
     scene->addItem(constr1.get());
     resizeEvent();
   }

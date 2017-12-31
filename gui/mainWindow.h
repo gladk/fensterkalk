@@ -18,7 +18,7 @@
 #include "constrGui.h"
 #include "order.h"
 
-#include <boost/shared_ptr.hpp>
+
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -73,7 +73,7 @@ private:
 
   QGraphicsView *view;
   QGraphicsScene *scene;
-  boost::shared_ptr<QGraphicsPolygonItem> poly1;
-  boost::shared_ptr<constrGui> constr1;
-  boost::shared_ptr<order> orderCur;
+  std::shared_ptr<QGraphicsPolygonItem> poly1;
+  std::shared_ptr<constrGui> constr1;
+  std::shared_ptr<order> orderCur;
 };

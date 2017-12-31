@@ -26,4 +26,4 @@
 #include "order.h"
 #include <vector>
 
-bool loadJson(std::string FNameI, boost::shared_ptr<order> orderCur);
+bool loadJson(std::string FNameI, std::shared_ptr<order> orderCur);

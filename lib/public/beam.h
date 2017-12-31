@@ -20,22 +20,22 @@
 
 #pragma once
 
-#include <boost/shared_ptr.hpp>
 #include <node.h>
+#include <memory>
 
 class beam {
 public:
-  beam(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2);
-  void changeNode1(boost::shared_ptr<node> nodeT);
-  void changeNode2(boost::shared_ptr<node> nodeT);
+  beam(std::shared_ptr<node> node1, std::shared_ptr<node> node2);
+  void changeNode1(std::shared_ptr<node> nodeT);
+  void changeNode2(std::shared_ptr<node> nodeT);
   void calculateLength();
   void show();
-  boost::shared_ptr<node> node1();
-  boost::shared_ptr<node> node2();
-  double calculateAngle(boost::shared_ptr<beam> b);
+  std::shared_ptr<node> node1();
+  std::shared_ptr<node> node2();
+  double calculateAngle(std::shared_ptr<beam> b);
 
 private:
-  boost::shared_ptr<node> _node1;
-  boost::shared_ptr<node> _node2;
+  std::shared_ptr<node> _node1;
+  std::shared_ptr<node> _node2;
   double _length;
 };

@@ -21,7 +21,7 @@
 #include "beam.h"
 #include <iostream>
 
-beam::beam(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2) {
+beam::beam(std::shared_ptr<node> node1, std::shared_ptr<node> node2) {
   _node1 = node1;
   _node2 = node2;
   this->calculateLength();
@@ -29,12 +29,12 @@ beam::beam(boost::shared_ptr<node> node1, boost::shared_ptr<node> node2) {
 
 void beam::calculateLength() { _length = (_node1->c() - _node2->c()).norm(); };
 
-void beam::changeNode1(boost::shared_ptr<node> nodeT) {
+void beam::changeNode1(std::shared_ptr<node> nodeT) {
   _node1 = nodeT;
   this->calculateLength();
 };
 
-void beam::changeNode2(boost::shared_ptr<node> nodeT) {
+void beam::changeNode2(std::shared_ptr<node> nodeT) {
   _node2 = nodeT;
   this->calculateLength();
 };
@@ -49,11 +49,11 @@ void beam::show() {
   std::cout << _node2->angle() * 180.0 / M_PI / 2.0 << std::endl;
 }
 
-boost::shared_ptr<node> beam::node1() { return _node1; }
+std::shared_ptr<node> beam::node1() { return _node1; }
 
-boost::shared_ptr<node> beam::node2() { return _node2; }
+std::shared_ptr<node> beam::node2() { return _node2; }
 
-double beam::calculateAngle(boost::shared_ptr<beam> f) {
+double beam::calculateAngle(std::shared_ptr<beam> f) {
   const Eigen::Vector3d a1 = (_node2->c() - _node1->c()).normalized();
   const Eigen::Vector3d a2 =
       ((f->node2())->c() - (f->node1())->c()).normalized();
