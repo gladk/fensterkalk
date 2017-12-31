@@ -21,12 +21,10 @@
 #include "order.h"
 #include <boost/foreach.hpp>
 
-order::order() {
-};
+order::order(){};
 
 boost::shared_ptr<constr> order::addConstr() {
-  boost::shared_ptr<constr> constrTMP = 
-    boost::shared_ptr<constr> (new constr());
+  boost::shared_ptr<constr> constrTMP = boost::shared_ptr<constr>(new constr());
   _constr.push_back(constrTMP);
   return constrTMP;
 };
@@ -37,8 +35,8 @@ bool order::addConstr(boost::shared_ptr<constr> constrTMP) {
 };
 
 bool order::calculate() {
-  BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
-    if (not(constrTmp->calculated())){
+  BOOST_FOREACH (boost::shared_ptr<constr> constrTmp, _constr) {
+    if (not(constrTmp->calculated())) {
       if (not(constrTmp->calculate())) {
         return false;
       }
@@ -48,16 +46,17 @@ bool order::calculate() {
 };
 
 void order::show() {
-  unsigned int i=1;
-  BOOST_FOREACH(boost::shared_ptr<constr> constrTmp, _constr) {
-    std::cout<<"==================="<<std::endl<<"Construction "<<i<<std::endl;
+  unsigned int i = 1;
+  BOOST_FOREACH (boost::shared_ptr<constr> constrTmp, _constr) {
+    std::cout << "===================" << std::endl
+              << "Construction " << i << std::endl;
     constrTmp->show();
     i++;
   }
 };
 
 boost::shared_ptr<constr> order::constrGet(unsigned int i) {
-  if (i<_constr.size() and i>=0) {
+  if (i < _constr.size() and i >= 0) {
     return _constr[i];
   } else {
     return NULL;

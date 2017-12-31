@@ -18,20 +18,13 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "log.h"
 
 namespace logging = boost::log;
 using namespace logging::trivial;
 
-logs::logs() {
-    
-}
+logs::logs() {}
 
-void logs::info(std::string s) {
-  BOOST_LOG_TRIVIAL(info) << s; 
-}
+void logs::info(std::string s) { BOOST_LOG_TRIVIAL(info) << s; }
 
-void logs::fatal(std::string s) {
-  BOOST_LOG_TRIVIAL(fatal) << s; 
-}
+void logs::fatal(std::string s) { BOOST_LOG_TRIVIAL(fatal) << s; }

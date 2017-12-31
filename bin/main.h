@@ -21,13 +21,13 @@
 #pragma once
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 
-#include <boost/filesystem.hpp> 
+#include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
 #include <boost/program_options.hpp>
 #include <boost/regex.hpp>
-#include <boost/foreach.hpp>
 
-#include <iostream>
+#include <Eigen/Dense>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
 #include <string>
-#include <Eigen/Dense>

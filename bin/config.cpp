@@ -22,6 +22,4 @@
 
 namespace fs = boost::filesystem;
 
-configopt::configopt(std::string FNameI) {
-  _FNameI = FNameI;
-};
+configopt::configopt(std::string FNameI) { _FNameI = FNameI; };

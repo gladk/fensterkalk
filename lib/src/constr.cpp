@@ -21,21 +21,19 @@
 #include "constr.h"
 #include <iostream>
 
-bool constr::calculated() const{return _calculatedConstr;}
-bool constr::calculate() {return true;}
+bool constr::calculated() const { return _calculatedConstr; }
+bool constr::calculate() { return true; }
 void constr::show() {}
-bool constr::checkFrames() {
-  return _mainFrame.checkBeams();
-}
+bool constr::checkFrames() { return _mainFrame.checkBeams(); }
 
 bool constr::addNodeMainFrame(Eigen::Vector3d nodeTMP) {
   _mainFrame.addNode(nodeTMP);
 }
 
-std::vector<boost::shared_ptr<node> > constr::mainFrameNodes() {
+std::vector<boost::shared_ptr<node>> constr::mainFrameNodes() {
   return _mainFrame.nodes();
 }
 
-std::vector<boost::shared_ptr<node> > constr::mainFrameNodesInternA() {
+std::vector<boost::shared_ptr<node>> constr::mainFrameNodesInternA() {
   return _mainFrame.nodesInternA();
 }

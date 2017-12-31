@@ -18,24 +18,24 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #pragma once
 
 #include "frame.h"
 
 class constr {
   friend class frame;
-  private:
-    bool _calculatedConstr=false;
-    frame _mainFrame;
-    
-  public:
-    constr () {};
-    bool calculated() const;
-    bool calculate();
-    bool checkFrames();
-    bool addNodeMainFrame(Eigen::Vector3d nodeTMP);
-    void show();
-    std::vector<boost::shared_ptr<node> > mainFrameNodes();
-    std::vector<boost::shared_ptr<node> > mainFrameNodesInternA();
+
+private:
+  bool _calculatedConstr = false;
+  frame _mainFrame;
+
+public:
+  constr(){};
+  bool calculated() const;
+  bool calculate();
+  bool checkFrames();
+  bool addNodeMainFrame(Eigen::Vector3d nodeTMP);
+  void show();
+  std::vector<boost::shared_ptr<node>> mainFrameNodes();
+  std::vector<boost::shared_ptr<node>> mainFrameNodesInternA();
 };

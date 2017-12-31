@@ -24,17 +24,20 @@ bool loadJson(std::string FNameI, boost::shared_ptr<order> orderCur) {
   using boost::property_tree::ptree;
   using boost::property_tree::read_json;
   ptree pt;
-  std::vector <boost::shared_ptr<node> > nodes;
-  boost::shared_ptr <constr> constrTMP (new constr());
-  
+  std::vector<boost::shared_ptr<node>> nodes;
+  boost::shared_ptr<constr> constrTMP(new constr());
+
   read_json(FNameI, pt);
   int nodes_number = pt.get<int>("nodes_number", -1);
-  if (nodes_number>0) {
-    for (unsigned i=0; i < nodes_number; i++){
+  if (nodes_number > 0) {
+    for (unsigned i = 0; i < nodes_number; i++) {
       Eigen::Vector3d nodeTMP = Eigen::Vector3d((Eigen::Vector3d(
-        pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".x"), 
-        pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".y"), 
-        pt.get<double>("nodes.node_"+boost::lexical_cast<std::string>(i)+".z"))));
+          pt.get<double>("nodes.node_" + boost::lexical_cast<std::string>(i) +
+                         ".x"),
+          pt.get<double>("nodes.node_" + boost::lexical_cast<std::string>(i) +
+                         ".y"),
+          pt.get<double>("nodes.node_" + boost::lexical_cast<std::string>(i) +
+                         ".z"))));
       if (not(constrTMP->addNodeMainFrame(nodeTMP))) {
         return false;
       }

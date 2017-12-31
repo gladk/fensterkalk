@@ -18,17 +18,16 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #pragma once
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 
-#include <boost/filesystem.hpp> 
+#include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
 #include <boost/program_options.hpp>
 #include <boost/regex.hpp>
-#include <boost/foreach.hpp>
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
 #include <string>
 
@@ -36,8 +35,8 @@
 #include <boost/log/trivial.hpp>
 
 class logs {
-  public:
-    logs();
-    void info(std::string s);
-    void fatal(std::string s);
+public:
+  logs();
+  void info(std::string s);
+  void fatal(std::string s);
 };

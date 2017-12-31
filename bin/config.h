@@ -20,22 +20,21 @@
 
 #pragma once
 #define BOOST_FILESYSTEM_NO_DEPRECATED
-#include <boost/filesystem.hpp> 
-#include <boost/property_tree/ptree.hpp>
+#include <boost/filesystem.hpp>
 #include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 
+#include <Eigen/Dense>
 #include <iostream>
 #include <string>
-#include <Eigen/Dense>
-
 
 class configopt {
-  private:
-    Eigen::Vector3d _c;                          // Center point
-    std::string _FNameI;                         // Output file name of particles
-    
-  public:
-    configopt(std::string FNameI);
-    std::string FNameI() {return _FNameI;}
-    void FNameI(std::string FNameI) {_FNameI=FNameI;}    
+private:
+  Eigen::Vector3d _c;  // Center point
+  std::string _FNameI; // Output file name of particles
+
+public:
+  configopt(std::string FNameI);
+  std::string FNameI() { return _FNameI; }
+  void FNameI(std::string FNameI) { _FNameI = FNameI; }
 };

@@ -19,77 +19,72 @@
 */
 
 #include "main.h"
-#include "log.h"
 #include "config.h"
-#include "order.h"
 #include "loadjson.h"
+#include "log.h"
+#include "order.h"
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
-
-int main(int ac, char* av[])
-{ 
-  boost::shared_ptr<logs> log (new logs());
+int main(int ac, char *av[]) {
+  boost::shared_ptr<logs> log(new logs());
   std::string configFileName;
-  
-  std::cout<<"\n\
+
+  std::cout << "\n\
 Fensterkalk \n\
 Copyright (C) 2013, 2014 Anton Gladky <gladky.anton@gmail.com> \n\
 This program comes with ABSOLUTELY NO WARRANTY.\n\
-"<<std::endl;
-  
+" << std::endl;
+
   try {
     po::options_description desc("Allowed options");
-    desc.add_options()
-      ("help", "produce help message")
-      ("input,i", po::value<std::string>(), "input file name")
-    ;
-    
+    desc.add_options()("help", "produce help message")(
+        "input,i", po::value<std::string>(), "input file name");
+
     po::positional_options_description p;
     p.add("input", -1);
-    po::variables_map vm;        
-    po::store(po::command_line_parser(ac, av).
-    options(desc).positional(p).run(), vm);
-    po::notify(vm);  
-    
+    po::variables_map vm;
+    po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(),
+              vm);
+    po::notify(vm);
+
     if (vm.count("help")) {
       std::cout << desc << std::endl;
       return 0;
     }
-    
+
     if (vm.count("input")) {
       std::string ss = "input file is: " + vm["input"].as<std::string>();
       configFileName = vm["input"].as<std::string>();
       log->info(ss);
     } else {
-      std::string ss = "input file is required, use `-i` option for that or `--help`.\n";
+      std::string ss =
+          "input file is required, use `-i` option for that or `--help`.\n";
       log->info(ss);
-      exit (EXIT_FAILURE);
+      exit(EXIT_FAILURE);
     }
-  }
-   catch(std::exception& e) {
-      std::string ss =  "error: " + std::string(e.what());
-      log->info(ss);
-      exit (EXIT_FAILURE);
-  }
-  catch(...) {
-      std::cerr << "Exception of unknown type!\n";
-      exit (EXIT_FAILURE);
+  } catch (std::exception &e) {
+    std::string ss = "error: " + std::string(e.what());
+    log->info(ss);
+    exit(EXIT_FAILURE);
+  } catch (...) {
+    std::cerr << "Exception of unknown type!\n";
+    exit(EXIT_FAILURE);
   }
   boost::shared_ptr<configopt> cfgPrm;
-  cfgPrm = boost::shared_ptr<configopt> (new configopt(configFileName));
+  cfgPrm = boost::shared_ptr<configopt>(new configopt(configFileName));
 
-  boost::shared_ptr<order> orderCur = boost::shared_ptr<order> (new order());
-  
+  boost::shared_ptr<order> orderCur = boost::shared_ptr<order>(new order());
+
   if (not(loadJson(cfgPrm->FNameI(), orderCur))) {
-    std::cerr<<"Loaded construction is wrong!"<<std::endl;
-    exit (EXIT_FAILURE);
+    std::cerr << "Loaded construction is wrong!" << std::endl;
+    exit(EXIT_FAILURE);
   }
-  
+
   if (not(orderCur->calculate())) {
-    std::cerr<<"Loaded construction is wrong!"<<std::endl;
-    exit (EXIT_FAILURE);
+    std::cerr << "Loaded construction is wrong!" << std::endl;
+    exit(EXIT_FAILURE);
   }
   orderCur->show();
 }

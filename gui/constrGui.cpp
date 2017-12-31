@@ -1,18 +1,20 @@
 #include "constrGui.h"
-#include <iostream>
 #include <boost/foreach.hpp>
+#include <iostream>
 
 constrGui::constrGui(boost::shared_ptr<constr> c) {
-  _frameGui = boost::shared_ptr<QPolygonF> (new QPolygonF());
-  _frameInternAGui = boost::shared_ptr<QPolygonF> (new QPolygonF());
-  
-  std::vector<boost::shared_ptr<node> > nodesV = c->mainFrameNodes();
-  std::vector<boost::shared_ptr<node> > nodesVInternA = c->mainFrameNodesInternA();
-  
-  unsigned int i=0;
-  BOOST_FOREACH(const auto &nd, nodesV) {
+  _frameGui = boost::shared_ptr<QPolygonF>(new QPolygonF());
+  _frameInternAGui = boost::shared_ptr<QPolygonF>(new QPolygonF());
+
+  std::vector<boost::shared_ptr<node>> nodesV = c->mainFrameNodes();
+  std::vector<boost::shared_ptr<node>> nodesVInternA =
+      c->mainFrameNodesInternA();
+
+  unsigned int i = 0;
+  BOOST_FOREACH (const auto &nd, nodesV) {
     const QPointF p1 = QPointF(nd->c()[0], -nd->c()[1]);
-    const QPointF p2 = QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
+    const QPointF p2 =
+        QPointF(nodesVInternA[i]->c()[0], -nodesVInternA[i]->c()[1]);
     *_frameGui << p1;
     *_frameInternAGui << p2;
     _frameInternASeal.push_back(QLineF(p1, p2));
@@ -20,20 +22,17 @@ constrGui::constrGui(boost::shared_ptr<constr> c) {
   }
 }
 
-void constrGui::paint(QPainter * painter, 
-      const QStyleOptionGraphicsItem * option, 
-      QWidget * widget) {
+void constrGui::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                      QWidget *widget) {
   painter->setBrush(Qt::white);
-  
-  QPen* penFrame = new QPen();
+
+  QPen *penFrame = new QPen();
   penFrame->setWidth(10.0);
   painter->setPen(*penFrame);
-  
+
   painter->drawConvexPolygon(*_frameGui);
   painter->drawConvexPolygon(*_frameInternAGui);
   painter->drawLines(_frameInternASeal);
 }
 
-QRectF constrGui::boundingRect() const{
-  return _frameGui->boundingRect();
-}
+QRectF constrGui::boundingRect() const { return _frameGui->boundingRect(); }

@@ -18,20 +18,19 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #pragma once
 
 #include "constr.h"
 
 class order {
-  private:
-    std::vector<boost::shared_ptr<constr> > _constr;
+private:
+  std::vector<boost::shared_ptr<constr>> _constr;
 
-  public:
-    order ();
-    boost::shared_ptr <constr> addConstr();
-    bool addConstr(boost::shared_ptr<constr> constrTMP);
-    bool calculate();
-    void show();
-    boost::shared_ptr<constr> constrGet(unsigned int i);
+public:
+  order();
+  boost::shared_ptr<constr> addConstr();
+  bool addConstr(boost::shared_ptr<constr> constrTMP);
+  bool calculate();
+  void show();
+  boost::shared_ptr<constr> constrGet(unsigned int i);
 };

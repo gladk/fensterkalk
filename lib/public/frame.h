@@ -26,39 +26,39 @@
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
-enum frameType {FRAME, SHUTTER, MULLION, BEAD};
+enum frameType { FRAME, SHUTTER, MULLION, BEAD };
 class frame {
   typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
   typedef KCG::Point_2 PointCG;
   typedef CGAL::Polygon_2<KCG> Polygon_2CG;
-  
-  private:
-    Polygon_2CG _frameCG;
-    std::vector<boost::shared_ptr<node> > _nodes;
-    std::vector<boost::shared_ptr<beam> > _beams;
-    bool _calculatedFrame=false;
-    double _height = 0;
-    double _widthA=58.0, _widthB=0.0, _widthC=0.0;
-    frameType _type=FRAME;
-    
-  public:
-    frame () {};
-    
-    bool addNode(Eigen::Vector3d nodeT);
-    bool checkBeams() const;
-    bool checkIsSimple(const std::vector<boost::shared_ptr<node> >  & nodes) const;
-    bool calculated() const;
-    void show() const;
-    bool calculate();
-    
-    double widthA() const;
-    double widthB() const;
-    double widthC() const;
-    double height() const;
-    frameType type() const;
-    void setGeometry(double wA, double wB, double wC, double h);
-    void setType(frameType t);
-    std::vector<boost::shared_ptr<node> > nodes();
-    std::vector<boost::shared_ptr<node> > nodesInternA();
-    void nodesIntern(Polygon_2CG & poly, const double W);
+
+private:
+  Polygon_2CG _frameCG;
+  std::vector<boost::shared_ptr<node>> _nodes;
+  std::vector<boost::shared_ptr<beam>> _beams;
+  bool _calculatedFrame = false;
+  double _height = 0;
+  double _widthA = 58.0, _widthB = 0.0, _widthC = 0.0;
+  frameType _type = FRAME;
+
+public:
+  frame(){};
+
+  bool addNode(Eigen::Vector3d nodeT);
+  bool checkBeams() const;
+  bool checkIsSimple(const std::vector<boost::shared_ptr<node>> &nodes) const;
+  bool calculated() const;
+  void show() const;
+  bool calculate();
+
+  double widthA() const;
+  double widthB() const;
+  double widthC() const;
+  double height() const;
+  frameType type() const;
+  void setGeometry(double wA, double wB, double wC, double h);
+  void setType(frameType t);
+  std::vector<boost::shared_ptr<node>> nodes();
+  std::vector<boost::shared_ptr<node>> nodesInternA();
+  void nodesIntern(Polygon_2CG &poly, const double W);
 };
