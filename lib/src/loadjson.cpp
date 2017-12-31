@@ -25,7 +25,7 @@ bool loadJson(std::string FNameI, std::shared_ptr<order> orderCur) {
   using boost::property_tree::read_json;
   ptree pt;
   std::vector<std::shared_ptr<Node>> nodes;
-  std::shared_ptr<constr> constrTMP(new constr());
+  std::shared_ptr<Constr> constrTMP(new Constr());
 
   read_json(FNameI, pt);
   int nodes_number = pt.get<int>("nodes_number", -1);

@@ -22,7 +22,7 @@
 
 #include <frame.h>
 
-class constr {
+class Constr {
   friend class Frame;
 
 private:
@@ -30,7 +30,7 @@ private:
   Frame _mainFrame;
 
 public:
-  constr(){};
+  Constr(){};
   bool calculated() const;
   bool calculate();
   bool checkFrames();

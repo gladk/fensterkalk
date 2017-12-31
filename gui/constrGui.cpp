@@ -2,7 +2,7 @@
 #include <boost/foreach.hpp>
 #include <iostream>
 
-constrGui::constrGui(std::shared_ptr<constr> c) {
+constrGui::constrGui(std::shared_ptr<Constr> c) {
   _frameGui = std::shared_ptr<QPolygonF>(new QPolygonF());
   _frameInternAGui = std::shared_ptr<QPolygonF>(new QPolygonF());
 

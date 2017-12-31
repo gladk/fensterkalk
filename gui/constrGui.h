@@ -12,7 +12,7 @@
 class constrGui : public QGraphicsItem {
 public:
   // constrGui(QGraphicsItem* parent=NULL) {};
-  constrGui(std::shared_ptr<constr> c);
+  constrGui(std::shared_ptr<Constr> c);
 
 protected:
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

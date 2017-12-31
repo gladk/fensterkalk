@@ -18,22 +18,22 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "constr.h"
+#include <constr.h>
 #include <iostream>
 
-bool constr::calculated() const { return _calculatedConstr; }
-bool constr::calculate() { return true; }
-void constr::show() {}
-bool constr::checkFrames() { return _mainFrame.checkBeams(); }
+bool Constr::calculated() const { return _calculatedConstr; }
+bool Constr::calculate() { return true; }
+void Constr::show() {}
+bool Constr::checkFrames() { return _mainFrame.checkBeams(); }
 
-bool constr::addNodeMainFrame(Eigen::Vector3d nodeTMP) {
+bool Constr::addNodeMainFrame(Eigen::Vector3d nodeTMP) {
   _mainFrame.addNode(nodeTMP);
 }
 
-std::vector<std::shared_ptr<Node>> constr::mainFrameNodes() {
+std::vector<std::shared_ptr<Node>> Constr::mainFrameNodes() {
   return _mainFrame.nodes();
 }
 
-std::vector<std::shared_ptr<Node>> constr::mainFrameNodesInternA() {
+std::vector<std::shared_ptr<Node>> Constr::mainFrameNodesInternA() {
   return _mainFrame.nodesInternA();
 }

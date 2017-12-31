@@ -24,13 +24,13 @@
 
 class order {
 private:
-  std::vector<std::shared_ptr<constr>> _constr;
+  std::vector<std::shared_ptr<Constr>> _constr;
 
 public:
   order();
-  std::shared_ptr<constr> addConstr();
-  bool addConstr(std::shared_ptr<constr> constrTMP);
+  std::shared_ptr<Constr> addConstr();
+  bool addConstr(std::shared_ptr<Constr> constrTMP);
   bool calculate();
   void show();
-  std::shared_ptr<constr> constrGet(unsigned int i);
+  std::shared_ptr<Constr> constrGet(unsigned int i);
 };
