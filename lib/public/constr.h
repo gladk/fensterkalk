@@ -36,6 +36,6 @@ public:
   bool checkFrames();
   bool addNodeMainFrame(Eigen::Vector3d nodeTMP);
   void show();
-  std::vector<std::shared_ptr<node>> mainFrameNodes();
-  std::vector<std::shared_ptr<node>> mainFrameNodesInternA();
+  std::vector<std::shared_ptr<Node>> mainFrameNodes();
+  std::vector<std::shared_ptr<Node>> mainFrameNodesInternA();
 };

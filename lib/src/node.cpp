@@ -21,14 +21,14 @@
 #include <iostream>
 #include <node.h>
 
-node::node(Eigen::Vector3d c, double angle) : _c(c), _angle(angle){};
+Node::Node(Eigen::Vector3d c, double angle) : _c(c), _angle(angle){};
 
-node::node(Eigen::Vector3d c) : _c(c), _angle(-1){};
+Node::Node(Eigen::Vector3d c) : _c(c), _angle(-1){};
 
-Eigen::Vector3d node::c() { return _c; };
+Eigen::Vector3d Node::c() { return _c; };
 
-void node::c(Eigen::Vector3d c) { _c = c; };
+void Node::c(Eigen::Vector3d c) { _c = c; };
 
-void node::angle(double angle) { _angle = angle; };
+void Node::angle(double angle) { _angle = angle; };
 
-double node::angle() { return _angle; };
+double Node::angle() { return _angle; };

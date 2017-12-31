@@ -18,13 +18,13 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <frame.h>
 #include <CGAL/create_offset_polygons_2.h>
 #include <boost/foreach.hpp>
+#include <frame.h>
 #include <iostream>
 
 bool frame::addNode(Eigen::Vector3d const nodeT) {
-  auto nodeTMP = std::shared_ptr<node>(new node(nodeT));
+  auto nodeTMP = std::shared_ptr<Node>(new Node(nodeT));
 
   // Create temporarly _nodeVector to check, whether polygon is simple
   if (_nodes.size() > 1) {
@@ -66,11 +66,12 @@ void frame::show() const {
 
 bool frame::checkBeams() const {
   for (int i = 1; i < _beams.size(); i++) {
-    if (_beams[i - 1]->nodeR() != _beams[i]->nodeL()) {
+    if (_beams[i - 1]->getNode(Side::RIGHT) != _beams[i]->getNode(Side::LEFT)) {
       return false;
     }
   }
-  if (_beams[0]->nodeL() != _beams[_beams.size() - 1]->nodeR()) {
+  if (_beams[0]->getNode(Side::LEFT) !=
+      _beams[_beams.size() - 1]->getNode(Side::RIGHT)) {
     return false;
   }
 
@@ -78,7 +79,7 @@ bool frame::checkBeams() const {
 };
 
 bool frame::checkIsSimple(
-    const std::vector<std::shared_ptr<node>> &nodes) const {
+    const std::vector<std::shared_ptr<Node>> &nodes) const {
   if (not(_frameCG.is_simple())) {
     return false;
   }
@@ -101,19 +102,19 @@ void frame::setGeometry(double wA, double wB, double wC, double h) {
 
 void frame::setType(frameType t) { _type = t; }
 
-std::vector<std::shared_ptr<node>> frame::nodes() {
-  std::vector<std::shared_ptr<node>> nodesRet = _nodes;
+std::vector<std::shared_ptr<Node>> frame::nodes() {
+  std::vector<std::shared_ptr<Node>> nodesRet = _nodes;
   return nodesRet;
 }
 
-std::vector<std::shared_ptr<node>> frame::nodesInternA() {
+std::vector<std::shared_ptr<Node>> frame::nodesInternA() {
   Polygon_2CG polyA;
   nodesIntern(polyA, _widthA);
-  std::vector<std::shared_ptr<node>> nodesRet;
+  std::vector<std::shared_ptr<Node>> nodesRet;
 
   for (auto vi = polyA.vertices_begin(); vi != polyA.vertices_end(); ++vi) {
-    auto nodeTMP = std::shared_ptr<node>(
-        new node(Eigen::Vector3d((*vi).x(), (*vi).y(), 0)));
+    auto nodeTMP = std::shared_ptr<Node>(
+        new Node(Eigen::Vector3d((*vi).x(), (*vi).y(), 0)));
     nodesRet.push_back(nodeTMP);
   }
   return nodesRet;

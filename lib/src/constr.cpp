@@ -30,10 +30,10 @@ bool constr::addNodeMainFrame(Eigen::Vector3d nodeTMP) {
   _mainFrame.addNode(nodeTMP);
 }
 
-std::vector<std::shared_ptr<node>> constr::mainFrameNodes() {
+std::vector<std::shared_ptr<Node>> constr::mainFrameNodes() {
   return _mainFrame.nodes();
 }
 
-std::vector<std::shared_ptr<node>> constr::mainFrameNodesInternA() {
+std::vector<std::shared_ptr<Node>> constr::mainFrameNodesInternA() {
   return _mainFrame.nodesInternA();
 }

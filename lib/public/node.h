@@ -19,16 +19,15 @@
 */
 
 #pragma once
-/** This is the node class which has two main parameters: centtal point and
- * angle  */
+/** node class which has two main parameters: central point and angle  */
 
 #include <Eigen/Dense>
 
-class node {
+class Node {
 public:
-  node(Eigen::Vector3d c, double angle);
-  node(Eigen::Vector3d c);
-  node() = delete;
+  Node(Eigen::Vector3d c, double angle);
+  Node(Eigen::Vector3d c);
+  Node() = delete;
 
   Eigen::Vector3d c();       /**<  @brief Get the center (in meter)*/
   void c(Eigen::Vector3d c); /**<  @brief Set the center (in meter)*/
@@ -36,6 +35,6 @@ public:
   void angle(double angle);  /**<  @brief Set the angle (in radians)*/
 
 private:
-  Eigen::Vector3d _c; /**< Center of the node (in meter)*/
-  double _angle;      /**< Angle of the node (in radians)*/
+  Eigen::Vector3d _c; /**< Center of the Node (in meter)*/
+  double _angle;      /**< Angle of the Node (in radians)*/
 };

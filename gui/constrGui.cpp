@@ -6,8 +6,8 @@ constrGui::constrGui(std::shared_ptr<constr> c) {
   _frameGui = std::shared_ptr<QPolygonF>(new QPolygonF());
   _frameInternAGui = std::shared_ptr<QPolygonF>(new QPolygonF());
 
-  std::vector<std::shared_ptr<node>> nodesV = c->mainFrameNodes();
-  std::vector<std::shared_ptr<node>> nodesVInternA =
+  std::vector<std::shared_ptr<Node>> nodesV = c->mainFrameNodes();
+  std::vector<std::shared_ptr<Node>> nodesVInternA =
       c->mainFrameNodesInternA();
 
   unsigned int i = 0;
