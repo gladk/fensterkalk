@@ -23,7 +23,7 @@
 
 node::node(Eigen::Vector3d c, double angle) : _c(c), _angle(angle){};
 
-node::node(Eigen::Vector3d c) _c(c), _angle(-1){};
+node::node(Eigen::Vector3d c) : _c(c), _angle(-1){};
 
 Eigen::Vector3d node::c() { return _c; };
 
