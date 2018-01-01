@@ -1,18 +1,18 @@
 #===========================================================
-SET(LIB_SRC src/node.cpp
-            src/beam.cpp
-            src/frame.cpp
-            src/constr.cpp
-            src/order.cpp
-            src/loadjson.cpp
+SET(LIB_SRC node.cpp
+            beam.cpp
+            frame.cpp
+            constr.cpp
+            order.cpp
+            loadjson.cpp
 )
 
-SET(LIB_HDR public/node.h
-            public/beam.h
-            public/frame.h
-            public/constr.h
-            public/order.h
-            public/loadjson.h
+SET(LIB_HDR node.h
+            beam.h
+            frame.h
+            constr.h
+            order.h
+            loadjson.h
 )
 
 ADD_LIBRARY(fensterkalklib SHARED ${LIB_SRC})

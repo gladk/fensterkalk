@@ -19,22 +19,40 @@
 */
 
 #pragma once
-/** node class which has two main parameters: central point and angle  */
 
-#include <Eigen/Dense>
+/** Beam class which keeps to nodes to calculate distance between them  */
 
-class Node {
+#include <memory>
+#include <node.h>
+
+enum class Side { LEFT, RIGHT };
+
+class Beam {
 public:
-  Node(Eigen::Vector3d c, double angle);
-  Node(Eigen::Vector3d c);
-  Node() = delete;
-
-  Eigen::Vector3d c();       /**<  @brief Get the center (in meter)*/
-  void c(Eigen::Vector3d c); /**<  @brief Set the center (in meter)*/
-  double angle();            /**<  @brief Get the angle (in radians)*/
-  void angle(double angle);  /**<  @brief Set the angle (in radians)*/
+  Beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR);
+  /**
+   * @brief Replace one of nodes by another one
+   * */
+  void replaceNode(std::shared_ptr<Node> nodeT, Side s = Side::LEFT);
+  /**
+   * @brief Calculate the distance between nodes
+   * */
+  void calculateLength();
+  /**
+   * @brief Output the information about this Beam
+   * */
+  void show() const;
+  /**
+   * @brief Get the node
+   * */
+  std::shared_ptr<Node> node(Side s = Side::LEFT) const;
+  /**
+   * @brief Calculate the angle and return it
+   * */
+  double calculateAngle(std::shared_ptr<Beam>) const;
 
 private:
-  Eigen::Vector3d _c; /**< Center of the Node (in meter)*/
-  double _angle;      /**< Angle of the Node (in radians)*/
+  std::shared_ptr<Node> _nodeL;
+  std::shared_ptr<Node> _nodeR;
+  double _length;
 };

@@ -3,8 +3,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1050</x>
-      <y>50</y>
+      <x>1070</x>
+      <y>70</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -26,16 +26,81 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>80</y>
+      <x>180</x>
+      <y>60</y>
       <w>180</w>
-      <h>80</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>node
+    <panel_attributes>Node
 --
 - _c: Eigen3::Vector3d
 - _angle: double
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>200</y>
+      <w>130</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Beam
+--
+- _nodeL: *Node
+- _nodeR: *Node
+- _length: double
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>120</y>
+      <w>110</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;90.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>340</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Frame
+--
+- _nodes: vector&lt;*Node&gt;
+- _beams: vector&lt;*Beam&gt;
+- _length: double
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>120</y>
+      <w>110</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0;90.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>230</y>
+      <w>160</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0;140.0;180.0;80.0;180.0</additional_attributes>
   </element>
 </diagram>

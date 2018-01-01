@@ -48,7 +48,7 @@ void Beam::show() const {
   std::cout << _nodeR->angle() * 180.0 / M_PI / 2.0 << std::endl;
 }
 
-std::shared_ptr<Node> Beam::getNode(Side side) const {
+std::shared_ptr<Node> Beam::node(Side side) const {
   if (side == Side::LEFT) {
     return _nodeL;
   } else {
@@ -59,7 +59,7 @@ std::shared_ptr<Node> Beam::getNode(Side side) const {
 double Beam::calculateAngle(std::shared_ptr<Beam> f) const {
   const Eigen::Vector3d a1 = (_nodeR->c() - _nodeL->c()).normalized();
   const Eigen::Vector3d a2 =
-      ((f->getNode(Side::RIGHT))->c() - (f->getNode(Side::LEFT))->c())
+      ((f->node(Side::RIGHT))->c() - (f->node(Side::LEFT))->c())
           .normalized();
   return acos(a1.dot(-a2));
 }

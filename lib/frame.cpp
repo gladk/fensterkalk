@@ -66,12 +66,12 @@ void Frame::show() const {
 
 bool Frame::checkBeams() const {
   for (int i = 1; i < _beams.size(); i++) {
-    if (_beams[i - 1]->getNode(Side::RIGHT) != _beams[i]->getNode(Side::LEFT)) {
+    if (_beams[i - 1]->node(Side::RIGHT) != _beams[i]->node(Side::LEFT)) {
       return false;
     }
   }
-  if (_beams[0]->getNode(Side::LEFT) !=
-      _beams[_beams.size() - 1]->getNode(Side::RIGHT)) {
+  if (_beams[0]->node(Side::LEFT) !=
+      _beams[_beams.size() - 1]->node(Side::RIGHT)) {
     return false;
   }
 

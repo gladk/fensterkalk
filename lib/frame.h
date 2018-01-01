@@ -25,24 +25,14 @@
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
-enum FrameType { FRAME, SHUTTER, MULLION, BEAD };
+enum class FrameType { FRAME, SHUTTER, MULLION, BEAD };
 class Frame {
   typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
   typedef KCG::Point_2 PointCG;
   typedef CGAL::Polygon_2<KCG> Polygon_2CG;
 
-private:
-  Polygon_2CG _FrameCG;
-  std::vector<std::shared_ptr<Node>> _nodes;
-  std::vector<std::shared_ptr<Beam>> _beams;
-  bool _calculatedFrame = false;
-  double _height = 0;
-  double _widthA = 58.0, _widthB = 0.0, _widthC = 0.0;
-  FrameType _type = FRAME;
-
 public:
   Frame(){};
-
   bool addNode(Eigen::Vector3d nodeT);
   bool checkBeams() const;
   bool checkIsSimple(const std::vector<std::shared_ptr<Node>> &nodes) const;
@@ -55,9 +45,21 @@ public:
   double widthC() const;
   double height() const;
   FrameType type() const;
+
   void setGeometry(double wA, double wB, double wC, double h);
   void setType(FrameType t);
   std::vector<std::shared_ptr<Node>> nodes();
   std::vector<std::shared_ptr<Node>> nodesInternA();
   void nodesIntern(Polygon_2CG &poly, const double W);
+
+private:
+  Polygon_2CG _FrameCG;
+  std::vector<std::shared_ptr<Node>> _nodes;
+  std::vector<std::shared_ptr<Beam>> _beams;
+  bool _calculatedFrame = false;
+  double _height = 0;
+  double _widthA = 58.0;
+  double _widthB = 0.0;
+  double _widthC = 0.0;
+  FrameType _type = FrameType::FRAME;
 };
