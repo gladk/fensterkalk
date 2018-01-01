@@ -23,14 +23,14 @@
 #include "constr.h"
 
 class Order {
-private:
-  std::vector<std::shared_ptr<Constr>> _constr;
-
 public:
-  Order();
+  Order() = default;
   std::shared_ptr<Constr> addConstr();
   bool addConstr(std::shared_ptr<Constr> constrTMP);
   bool calculate();
   void show();
   std::shared_ptr<Constr> constrGet(unsigned int i);
+
+private:
+  std::vector<std::shared_ptr<Constr>> _constr;
 };

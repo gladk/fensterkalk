@@ -18,7 +18,6 @@
     along with fensterkalk.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>

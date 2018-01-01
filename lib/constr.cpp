@@ -19,7 +19,6 @@
 */
 
 #include <constr.h>
-#include <iostream>
 
 bool Constr::calculated() const { return _calculatedConstr; }
 bool Constr::calculate() { return true; }

@@ -19,6 +19,7 @@
 */
 
 #pragma once
+/** Frame class contains the frame relevant parameters */
 
 #include <beam.h>
 
@@ -27,9 +28,9 @@
 
 enum class FrameType { FRAME, SHUTTER, MULLION, BEAD };
 class Frame {
-  typedef CGAL::Exact_predicates_inexact_constructions_kernel KCG;
-  typedef KCG::Point_2 PointCG;
-  typedef CGAL::Polygon_2<KCG> Polygon_2CG;
+  using KCG = CGAL::Exact_predicates_inexact_constructions_kernel;
+  using PointCG = KCG::Point_2;
+  using Polygon_2CG = CGAL::Polygon_2<KCG>;
 
 public:
   Frame(){};
@@ -53,10 +54,10 @@ public:
   void nodesIntern(Polygon_2CG &poly, const double W);
 
 private:
-  Polygon_2CG _FrameCG;
-  std::vector<std::shared_ptr<Node>> _nodes;
-  std::vector<std::shared_ptr<Beam>> _beams;
-  bool _calculatedFrame = false;
+  Polygon_2CG _FrameCG;  /**<  CGAL structure for the polygon */
+  std::vector<std::shared_ptr<Node>> _nodes; /**<  vector of nodes */
+  std::vector<std::shared_ptr<Beam>> _beams; /**<  vector of beams */
+  bool _calculatedFrame = false;  /**<  is the frame calculated or not */
   double _height = 0;
   double _widthA = 58.0;
   double _widthB = 0.0;

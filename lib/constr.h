@@ -25,12 +25,8 @@
 class Constr {
   friend class Frame;
 
-private:
-  bool _calculatedConstr = false;
-  Frame _mainFrame;
-
 public:
-  Constr(){};
+  Constr() = default;
   bool calculated() const;
   bool calculate();
   bool checkFrames();
@@ -38,4 +34,8 @@ public:
   void show();
   std::vector<std::shared_ptr<Node>> mainFrameNodes();
   std::vector<std::shared_ptr<Node>> mainFrameNodesInternA();
+
+private:
+  bool _calculatedConstr = false;
+  Frame _mainFrame;
 };

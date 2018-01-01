@@ -21,9 +21,8 @@
 #include <beam.h>
 #include <iostream>
 
-Beam::Beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR) {
-  _nodeL = nodeL;
-  _nodeR = nodeR;
+Beam::Beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR)
+    : _nodeL(nodeL), _nodeR(nodeR) {
   this->calculateLength();
 };
 
@@ -59,7 +58,6 @@ std::shared_ptr<Node> Beam::node(Side side) const {
 double Beam::calculateAngle(std::shared_ptr<Beam> f) const {
   const Eigen::Vector3d a1 = (_nodeR->c() - _nodeL->c()).normalized();
   const Eigen::Vector3d a2 =
-      ((f->node(Side::RIGHT))->c() - (f->node(Side::LEFT))->c())
-          .normalized();
+      ((f->node(Side::RIGHT))->c() - (f->node(Side::LEFT))->c()).normalized();
   return acos(a1.dot(-a2));
 }

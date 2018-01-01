@@ -13,7 +13,7 @@ OPTION(BUILD_DOC "Build documentation" OFF)
 #C++14 support
 set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
 #===========================================================
-FIND_PACKAGE(Boost COMPONENTS program_options filesystem system regex iostreams log log_setup thread REQUIRED)
+FIND_PACKAGE(Boost COMPONENTS program_options filesystem system log log_setup REQUIRED)
 INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ADD_DEFINITIONS( "-DBOOST_LOG_DYN_LINK" )

@@ -19,7 +19,6 @@
 */
 
 #include <CGAL/create_offset_polygons_2.h>
-#include <boost/foreach.hpp>
 #include <frame.h>
 #include <iostream>
 
@@ -57,7 +56,7 @@ bool Frame::addNode(Eigen::Vector3d const nodeT) {
 
 void Frame::show() const {
   unsigned int i = 1;
-  BOOST_FOREACH (auto beamTMP, _beams) {
+  for (const auto &beamTMP : _beams) {
     std::cout << "Beam " << i << ": ";
     beamTMP->show();
     i++;
