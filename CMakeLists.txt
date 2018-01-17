@@ -8,6 +8,7 @@ INCLUDE(GNUInstallDirs)
 #===========================================================
 # Options
 OPTION(BUILD_DOC "Build documentation" OFF)
+OPTION(ENABLE_TESTING "Enable testing" OFF)
 #===========================================================
 
 #C++14 support
@@ -25,6 +26,11 @@ FIND_PACKAGE(CGAL REQUIRED)
 ADD_DEFINITIONS( "${CGAL_DEFINITIONS}")
 
 FIND_PACKAGE(GMP REQUIRED)
+
+IF (ENABLE_TESTING)
+  INCLUDE_DIRECTORIES (/usr/src/gtest)
+  ENABLE_TESTING()
+ENDIF (ENABLE_TESTING)
 
 #===========================================================
 IF (BUILD_DOC)
