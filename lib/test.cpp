@@ -21,9 +21,11 @@
 #include "constr.h"
 #include <gtest/gtest.h>
 
+auto constrGLOB = std::make_shared<Constr>(Constr());
+
 TEST(PrimitiveTest, CreateConstruction) {
   using namespace Eigen;
-  std::shared_ptr<Constr> constrTMP = std::make_shared<Constr>(Constr());
+  auto constrTMP = std::make_shared<Constr>(Constr());
   // The empty construction should be not calculated
   EXPECT_EQ(false, constrTMP->calculated());
   // Add nodes into the construction
@@ -33,4 +35,11 @@ TEST(PrimitiveTest, CreateConstruction) {
   EXPECT_EQ(true, constrTMP->checkFrames());
   // Three nodes should be available
   EXPECT_EQ(3, (constrTMP->mainFrameNodes()).size());
+  constrGLOB = constrTMP;
+}
+
+TEST(PrimitiveTest, CopiedConstruction) {
+  EXPECT_EQ(false, constrGLOB->calculated());
+  // Three nodes should be available in the copied construction
+  EXPECT_EQ(3, (constrGLOB->mainFrameNodes()).size());
 }
