@@ -36,8 +36,6 @@ public:
   Frame(){};
   bool addNode(Eigen::Vector3d nodeT); /**< @brief Add node to the frame */
   bool checkBeams() const; /**< @brief Check frame on its integrity */
-  bool checkIsSimple(const std::vector<std::shared_ptr<Node>> &nodes)
-      const;               /**< @brief  Check whether the frame is simple*/
   bool calculated() const; /**< @brief  Check whether the frame is calculated*/
   void show() const; /**< @brief  Output the main geometrical info into the
                         standard output*/
@@ -60,6 +58,8 @@ public:
                    const double W); /**< @brief Set the intefnal nodes*/
 
 private:
+  bool checkIsSimple(const std::vector<std::shared_ptr<Node>> &nodes)
+      const;            /**< @brief  Check whether the frame is simple*/
   Polygon_2CG _FrameCG; /**< @brief CGAL structure for the polygon */
   std::vector<std::shared_ptr<Node>> _nodes; /**< @brief vector of nodes */
   std::vector<std::shared_ptr<Beam>> _beams; /**< @brief vector of beams */
