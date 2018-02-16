@@ -21,8 +21,6 @@
 #include <constr.h>
 
 bool Constr::calculated() const { return _calculatedConstr; }
-bool Constr::calculate() { return true; }
-void Constr::show() {}
 bool Constr::checkFrames() { return _mainFrame.checkBeams(); }
 
 bool Constr::addNodeMainFrame(Eigen::Vector3d &&nodeTMP) {

@@ -27,15 +27,18 @@ class Constr {
 
 public:
   Constr() = default;
-  bool calculated() const;
-  bool calculate();
-  bool checkFrames();
-  bool addNodeMainFrame(Eigen::Vector3d && nodeTMP);
-  void show();
-  std::vector<std::shared_ptr<Node>> mainFrameNodes();
-  std::vector<std::shared_ptr<Node>> mainFrameNodesInternA();
+  bool calculated()
+      const; /**< @brief Return whether the construction is calculated*/
+  bool checkFrames(); /**< @brief Check all frames*/
+  bool addNodeMainFrame(
+      Eigen::Vector3d &&nodeTMP); /**< @brief Add node to the main frame*/
+  std::vector<std::shared_ptr<Node>>
+  mainFrameNodes(); /**< @brief Return the vector of nodes*/
+  std::vector<std::shared_ptr<Node>>
+  mainFrameNodesInternA(); /**< @brief Return the vector of internal nodes*/
 
 private:
-  bool _calculatedConstr = false;
-  Frame _mainFrame;
+  bool _calculatedConstr =
+      false;        /**< @brief is the construction calculated or not */
+  Frame _mainFrame; /**< @brief main frame object */
 };
