@@ -34,9 +34,7 @@ bool Order::addConstr(std::shared_ptr<Constr> constrTMP) {
 bool Order::calculate() {
   for (const auto &constrTmp : _constr) {
     if (not(constrTmp->calculated())) {
-      if (not(constrTmp->calculate())) {
-        return false;
-      }
+      return false;
     }
   }
   return true;
@@ -47,7 +45,6 @@ void Order::show() {
   for (const auto constrTmp : _constr) {
     std::cout << "===================" << std::endl
               << "Construction " << i << std::endl;
-    constrTmp->show();
     i++;
   }
 };

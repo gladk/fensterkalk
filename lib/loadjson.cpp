@@ -44,7 +44,6 @@ bool loadJson(std::string FNameI, std::shared_ptr<Order> orderCur) {
     }
   }
   if (not(constrTMP->checkFrames())) {
-    constrTMP->show();
     return false;
   }
   orderCur->addConstr(constrTMP);
