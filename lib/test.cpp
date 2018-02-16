@@ -19,7 +19,6 @@
 */
 
 #include <gtest/gtest.h>
-#include <limits.h>
 
 TEST(test01, allTest) {
   for (unsigned short i = 1; i <= 4; i++) {

@@ -23,7 +23,6 @@
 #include <frame.h>
 
 class Constr {
-  friend class Frame;
 
 public:
   Constr() = default;
