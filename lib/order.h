@@ -25,12 +25,17 @@
 class Order {
 public:
   Order() = default;
-  std::shared_ptr<Constr> addConstr();
-  bool addConstr(std::shared_ptr<Constr> constrTMP);
-  bool calculate();
-  void show();
-  std::shared_ptr<Constr> constrGet(unsigned int i);
+  std::shared_ptr<Constr>
+  addConstr(); /**< @brief ADd new empty construction into the order*/
+  bool addConstr(std::shared_ptr<Constr> constrTMP); /**< @brief Add new
+                                                        construction into the
+                                                        order*/
+  bool calculate(); /**< @brief (re)calculate the constructions in the order*/
+  void show();      /**< @brief Show constructions in the order*/
+  std::shared_ptr<Constr>
+  constrGet(unsigned int i); /**< @brief Return the ptr on the construction*/
 
 private:
-  std::vector<std::shared_ptr<Constr>> _constr;
+  std::vector<std::shared_ptr<Constr>>
+      _constr; /**< @brief vector of constructions */
 };
