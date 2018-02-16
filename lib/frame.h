@@ -52,8 +52,11 @@ public:
   void setType(FrameType t);  /**< @brief Set the frame type*/
   std::vector<std::shared_ptr<Node>>
   nodes(); /**< @brief Return the vector of nodes*/
-  std::vector<std::shared_ptr<Node>>
-  nodesInternA(); /**< @brief Return the vector of internal nodes*/
+  std::
+      vector<std::shared_ptr<Node>>
+      nodesInternA(); /**< @brief Return the vector of internal nodes (nodes,
+                         which are creating the internal contour of the frame.
+                         It should be soon replaced by the generic function.*/
   void nodesIntern(Polygon_2CG &poly,
                    const double W); /**< @brief Set the intefnal nodes*/
 
