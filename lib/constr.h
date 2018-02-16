@@ -30,7 +30,7 @@ public:
   bool calculated() const;
   bool calculate();
   bool checkFrames();
-  bool addNodeMainFrame(Eigen::Vector3d nodeTMP);
+  bool addNodeMainFrame(Eigen::Vector3d && nodeTMP);
   void show();
   std::vector<std::shared_ptr<Node>> mainFrameNodes();
   std::vector<std::shared_ptr<Node>> mainFrameNodesInternA();

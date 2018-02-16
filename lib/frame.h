@@ -34,7 +34,7 @@ class Frame {
 
 public:
   Frame(){};
-  bool addNode(Eigen::Vector3d nodeT); /**< @brief Add node to the frame */
+  bool addNode(Eigen::Vector3d && nodeT); /**< @brief Add node to the frame */
   bool checkBeams() const; /**< @brief Check frame on its integrity */
   bool calculated() const; /**< @brief  Check whether the frame is calculated*/
   void show() const; /**< @brief  Output the main geometrical info into the

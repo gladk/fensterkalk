@@ -22,7 +22,7 @@
 #include <frame.h>
 #include <iostream>
 
-bool Frame::addNode(Eigen::Vector3d const nodeT) {
+bool Frame::addNode(Eigen::Vector3d &&nodeT) {
   auto nodeTMP = std::shared_ptr<Node>(new Node(nodeT));
 
   // Create temporarly _nodeVector to check, whether polygon is simple
