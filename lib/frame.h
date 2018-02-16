@@ -34,33 +34,39 @@ class Frame {
 
 public:
   Frame(){};
-  bool addNode(Eigen::Vector3d nodeT);
-  bool checkBeams() const;
-  bool checkIsSimple(const std::vector<std::shared_ptr<Node>> &nodes) const;
-  bool calculated() const;
-  void show() const;
-  bool calculate();
+  bool addNode(Eigen::Vector3d nodeT); /**< @brief Add node to the frame */
+  bool checkBeams() const; /**< @brief Check frame on its integrity */
+  bool checkIsSimple(const std::vector<std::shared_ptr<Node>> &nodes)
+      const;               /**< @brief  Check whether the frame is simple*/
+  bool calculated() const; /**< @brief  Check whether the frame is calculated*/
+  void show() const; /**< @brief  Output the main geometrical info into the
+                        standard output*/
+  bool calculate();  /**< @brief Calculate the frame */
 
-  double widthA() const;
-  double widthB() const;
-  double widthC() const;
-  double height() const;
-  FrameType type() const;
+  double widthA() const;  /**< @brief Return the width A*/
+  double widthB() const;  /**< @brief Return the width B*/
+  double widthC() const;  /**< @brief Return the width C*/
+  double height() const;  /**< @brief Return the height*/
+  FrameType type() const; /**< @brief Return the type of the frame*/
 
-  void setGeometry(double wA, double wB, double wC, double h);
-  void setType(FrameType t);
-  std::vector<std::shared_ptr<Node>> nodes();
-  std::vector<std::shared_ptr<Node>> nodesInternA();
-  void nodesIntern(Polygon_2CG &poly, const double W);
+  void setGeometry(double wA, double wB, double wC,
+                   double h); /**< @brief Set the main profile geometry*/
+  void setType(FrameType t);  /**< @brief Set the frame type*/
+  std::vector<std::shared_ptr<Node>>
+  nodes(); /**< @brief Return the vector of nodes*/
+  std::vector<std::shared_ptr<Node>>
+  nodesInternA(); /**< @brief Return the vector of internal nodes*/
+  void nodesIntern(Polygon_2CG &poly,
+                   const double W); /**< @brief Set the intefnal nodes*/
 
 private:
-  Polygon_2CG _FrameCG;  /**<  CGAL structure for the polygon */
-  std::vector<std::shared_ptr<Node>> _nodes; /**<  vector of nodes */
-  std::vector<std::shared_ptr<Beam>> _beams; /**<  vector of beams */
-  bool _calculatedFrame = false;  /**<  is the frame calculated or not */
-  double _height = 0;
-  double _widthA = 58.0;
-  double _widthB = 0.0;
-  double _widthC = 0.0;
-  FrameType _type = FrameType::FRAME;
+  Polygon_2CG _FrameCG; /**< @brief CGAL structure for the polygon */
+  std::vector<std::shared_ptr<Node>> _nodes; /**< @brief vector of nodes */
+  std::vector<std::shared_ptr<Beam>> _beams; /**< @brief vector of beams */
+  bool _calculatedFrame = false; /**< @brief is the frame calculated or not */
+  double _height = 0;            /**< @brief height of the profile */
+  double _widthA = 58.0;         /**< @brief width A of the profile */
+  double _widthB = 0.0;          /**< @brief width B of the profile*/
+  double _widthC = 0.0;          /**< @brief width C of the profile*/
+  FrameType _type = FrameType::FRAME; /**< @brief Type of the frame*/
 };

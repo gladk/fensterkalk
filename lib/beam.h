@@ -30,29 +30,22 @@ enum class Side { LEFT, RIGHT };
 class Beam {
 public:
   Beam(std::shared_ptr<Node> nodeL, std::shared_ptr<Node> nodeR);
-  /**
-   * @brief Replace one of nodes by another one
-   * */
-  void replaceNode(std::shared_ptr<Node> nodeT, Side s = Side::LEFT);
-  /**
-   * @brief Calculate the distance between nodes
-   * */
-  void calculateLength();
-  /**
-   * @brief Output the information about this Beam
-   * */
-  void show() const;
-  /**
-   * @brief Get the node
-   * */
-  std::shared_ptr<Node> node(Side s = Side::LEFT) const;
-  /**
-   * @brief Calculate the angle and return it
-   * */
-  double calculateAngle(std::shared_ptr<Beam>) const;
+  void replaceNode(
+      std::shared_ptr<Node> nodeT,
+      Side s = Side::LEFT); /**<  @brief Replace one of nodes by another one*/
+  void calculateLength();   /**<  @brief Calculate the distance between nodes*/
+  void show() const;        /**<  @brief Output the information about the main
+                               parameters of this beam*/
+  std::shared_ptr<Node> node(Side s = Side::LEFT) const; /**<  @brief Get the
+                                                            node of the side
+                                                            (Side::LEFT - by
+                                                            default or
+                                                            Side::RIGHT)*/
+  double calculateAngle(std::shared_ptr<Beam>)
+      const; /**<  @brief Calculate the angle and return it*/
 
 private:
-  std::shared_ptr<Node> _nodeL;
-  std::shared_ptr<Node> _nodeR;
-  double _length;
+  std::shared_ptr<Node> _nodeL; /**<  @brief ptr on left node */
+  std::shared_ptr<Node> _nodeR; /**<  @brief ptr on right node */
+  double _length; /**<  @brief Calculated length of the node (meter) */
 };
