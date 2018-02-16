@@ -34,6 +34,11 @@ IF (ENABLE_TESTING)
             /usr/src/gtest/src/gtest-all.cc
             /usr/src/googletest/googletest/src/gtest_main.cc
             test.cpp)
-    TARGET_LINK_LIBRARIES(testlib pthread)
+    TARGET_LINK_LIBRARIES(testlib
+      fensterkalklib
+      ${Boost_LIBRARIES}
+      ${CGAL_LIBRARIES}
+      ${GMP_LIBRARIES}
+    )
     ADD_TEST(testlib testlib)
 ENDIF (ENABLE_TESTING)
