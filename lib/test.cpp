@@ -27,19 +27,19 @@ TEST(PrimitiveTest, CreateConstruction) {
   using namespace Eigen;
   auto constrTMP = std::make_shared<Constr>(Constr());
   // The empty construction should be not calculated
-  EXPECT_EQ(false, constrTMP->calculated());
+  EXPECT_FALSE(constrTMP->calculated());
   // Add nodes into the construction
-  EXPECT_EQ(true, constrTMP->addNodeMainFrame(std::move(Vector3d(0, 0, 0))));
-  EXPECT_EQ(true, constrTMP->addNodeMainFrame(std::move(Vector3d(2, 0, 0))));
-  EXPECT_EQ(true, constrTMP->addNodeMainFrame(std::move(Vector3d(2, 2, 0))));
-  EXPECT_EQ(true, constrTMP->checkFrames());
+  EXPECT_TRUE(constrTMP->addNodeMainFrame(std::move(Vector3d(0, 0, 0))));
+  EXPECT_TRUE(constrTMP->addNodeMainFrame(std::move(Vector3d(2, 0, 0))));
+  EXPECT_TRUE(constrTMP->addNodeMainFrame(std::move(Vector3d(2, 2, 0))));
+  EXPECT_TRUE(constrTMP->checkFrames());
   // Three nodes should be available
   EXPECT_EQ(3, (constrTMP->mainFrameNodes()).size());
   constrGLOB = constrTMP;
 }
 
 TEST(PrimitiveTest, CopiedConstruction) {
-  EXPECT_EQ(false, constrGLOB->calculated());
+  EXPECT_FALSE(constrGLOB->calculated());
   // Three nodes should be available in the copied construction
   EXPECT_EQ(3, (constrGLOB->mainFrameNodes()).size());
 }
