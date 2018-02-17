@@ -23,8 +23,7 @@
 #include <iostream>
 
 bool Frame::addNode(Eigen::Vector3d &&nodeT) {
-  auto nodeTMP = std::make_shared<Node>(Node(nodeT));
-
+  const auto nodeTMP = std::make_shared<Node>(Node(nodeT));
   // Create temporarly _nodeVector to check, whether polygon is simple
   if (_nodes.size() > 1) {
     auto nodesTMP = _nodes;
@@ -75,10 +74,10 @@ bool Frame::checkBeams() const {
 
 bool Frame::checkIsSimple(
     const std::vector<std::shared_ptr<Node>> &nodes) const {
-  if (not(_FrameCG.is_simple())) {
+  if (not(_FrameCG.is_simple()))
     return false;
-  }
-  return true;
+  else
+    return true;
 }
 
 double Frame::widthA() const { return _widthA; }
