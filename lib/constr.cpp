@@ -24,7 +24,7 @@ bool Constr::calculated() const { return _calculatedConstr; }
 bool Constr::checkFrames() { return _mainFrame.checkBeams(); }
 
 bool Constr::addNodeMainFrame(Eigen::Vector3d &&nodeTMP) {
-  _mainFrame.addNode(std::move(nodeTMP));
+  return _mainFrame.addNode(std::move(nodeTMP));
 }
 
 std::vector<std::shared_ptr<Node>> Constr::mainFrameNodes() {

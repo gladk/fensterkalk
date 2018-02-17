@@ -24,7 +24,15 @@
 
 bool Frame::addNode(Eigen::Vector3d &&nodeT) {
   const auto nodeTMP = std::make_shared<Node>(Node(nodeT));
-  // Create temporarly _nodeVector to check, whether polygon is simple
+  // Check whether the such node is already in the vector
+  for (const auto &i : _nodes) {
+    if (nodeT == i->c()) {
+      std::cerr << "Node with the same center exist already!!" << std::endl;
+      return false;
+    }
+  }
+
+  // Create temporarily _nodeVector to check, whether polygon is simple
   if (_nodes.size() > 1) {
     auto nodesTMP = _nodes;
     nodesTMP.push_back(nodeTMP);

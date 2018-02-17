@@ -28,11 +28,31 @@ TEST(PrimitiveTest, CreateConstruction) {
   auto constrTMP = std::make_shared<Constr>(Constr());
   // The empty construction should be not calculated
   EXPECT_FALSE(constrTMP->calculated());
+
   // Add nodes into the construction
   EXPECT_TRUE(constrTMP->addNodeMainFrame(std::move(Vector3d(0, 0, 0))));
+
+  // We add the same node one more time, the frame should reject it.
+  EXPECT_FALSE(constrTMP->addNodeMainFrame(std::move(Vector3d(0, 0, 0))));
+
+  // The only one node now in the frame
+  EXPECT_EQ(1, (constrTMP->mainFrameNodes()).size());
+
+  // Add normal node
   EXPECT_TRUE(constrTMP->addNodeMainFrame(std::move(Vector3d(2, 0, 0))));
+
+  // Two nodes now in the frame
+  EXPECT_EQ(2, (constrTMP->mainFrameNodes()).size());
+
+  // Add normal node
   EXPECT_TRUE(constrTMP->addNodeMainFrame(std::move(Vector3d(2, 2, 0))));
+
+  // We add the same node one more time, the frame should reject it.
+  EXPECT_FALSE(constrTMP->addNodeMainFrame(std::move(Vector3d(2, 2, 0))));
+
+  // Frames are OK
   EXPECT_TRUE(constrTMP->checkFrames());
+
   // Three nodes should be available
   EXPECT_EQ(3, (constrTMP->mainFrameNodes()).size());
   constrGLOB = constrTMP;
