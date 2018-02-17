@@ -37,12 +37,9 @@ bool Frame::addNode(Eigen::Vector3d &&nodeT) {
 
   _nodes.push_back(nodeTMP);
   if (_nodes.size() == 3) {
-    auto beamTMP1 = std::make_shared<Beam>(Beam(_nodes[0], _nodes[1]));
-    auto beamTMP2 = std::make_shared<Beam>(Beam(_nodes[1], _nodes[2]));
-    auto beamTMP3 = std::make_shared<Beam>(Beam(_nodes[2], _nodes[0]));
-    _beams.push_back(beamTMP1);
-    _beams.push_back(beamTMP2);
-    _beams.push_back(beamTMP3);
+    _beams.emplace_back(std::make_shared<Beam>(Beam(_nodes[0], _nodes[1])));
+    _beams.emplace_back(std::make_shared<Beam>(Beam(_nodes[1], _nodes[2])));
+    _beams.emplace_back(std::make_shared<Beam>(Beam(_nodes[2], _nodes[0])));
   } else if (_beams.size() > 3) {
     _beams[_beams.size() - 1]->replaceNode(nodeTMP, Side::RIGHT);
     _beams.emplace_back(
