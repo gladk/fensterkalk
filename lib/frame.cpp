@@ -23,7 +23,7 @@
 #include <iostream>
 
 bool Frame::addNode(Eigen::Vector3d &&nodeT) {
-  auto nodeTMP = std::shared_ptr<Node>(new Node(nodeT));
+  auto nodeTMP = std::make_shared<Node>(Node(nodeT));
 
   // Create temporarly _nodeVector to check, whether polygon is simple
   if (_nodes.size() > 1) {
@@ -37,9 +37,9 @@ bool Frame::addNode(Eigen::Vector3d &&nodeT) {
 
   _nodes.push_back(nodeTMP);
   if (_nodes.size() == 3) {
-    auto beamTMP1 = std::shared_ptr<Beam>(new Beam(_nodes[0], _nodes[1]));
-    auto beamTMP2 = std::shared_ptr<Beam>(new Beam(_nodes[1], _nodes[2]));
-    auto beamTMP3 = std::shared_ptr<Beam>(new Beam(_nodes[2], _nodes[0]));
+    auto beamTMP1 = std::make_shared<Beam>(Beam(_nodes[0], _nodes[1]));
+    auto beamTMP2 = std::make_shared<Beam>(Beam(_nodes[1], _nodes[2]));
+    auto beamTMP3 = std::make_shared<Beam>(Beam(_nodes[2], _nodes[0]));
     _beams.push_back(beamTMP1);
     _beams.push_back(beamTMP2);
     _beams.push_back(beamTMP3);
