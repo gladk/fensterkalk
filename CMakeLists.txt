@@ -12,11 +12,10 @@ OPTION(ENABLE_TESTING "Enable testing" OFF)
 #===========================================================
 
 #C++14 support
-set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
+set (CMAKE_CXX_STANDARD 14)
 #===========================================================
 FIND_PACKAGE(Boost COMPONENTS program_options filesystem system log log_setup REQUIRED)
 INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS})
-LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ADD_DEFINITIONS( "-DBOOST_LOG_DYN_LINK" )
 
 FIND_PACKAGE(Eigen3 REQUIRED)
@@ -60,7 +59,6 @@ SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 #===========================================================
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib)
 ADD_SUBDIRECTORY("${CMAKE_SOURCE_DIR}/lib")
 #===========================================================
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/bin)
